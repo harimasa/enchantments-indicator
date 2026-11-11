@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 public final class ImGuiConfigScreen extends Screen {
 
@@ -21,8 +22,8 @@ public final class ImGuiConfigScreen extends Screen {
     private boolean textureMode = true;
     private final ImBoolean gradient = new ImBoolean(false);
     private boolean modEnabled = true;
-    private final float[] mainColor = { 0.75f, 0.33f, 1.0f }; // Фиолетовый по умолчанию
-    private float uiScalePercent = 100.0f; // 100% по умолчанию
+    private final float[] mainColor = { 0.75f, 0.33f, 1.0f };
+    private float uiScalePercent = 100.0f;
 
     private int enchantment = 0;
 
@@ -33,7 +34,7 @@ public final class ImGuiConfigScreen extends Screen {
     private static final int THEME_COLOR_COUNT = 23;
 
     public ImGuiConfigScreen() {
-        super(Component.literal("Enchantment Visuals"));
+        super(Component.literal("Enchantment Indicator"));
     }
 
     @Override
@@ -96,8 +97,7 @@ public final class ImGuiConfigScreen extends Screen {
             drawSidebar();
             ImGui.sameLine();
 
-            // --- Рисуем вертикальную серую полосу ---
-            float lineX = ImGui.getCursorScreenPosX() - s(4); // Посередине между сайдбаром и контентом
+            float lineX = ImGui.getCursorScreenPosX() - s(4);
             float lineY1 = ImGui.getCursorScreenPosY();
             float lineY2 = lineY1 + ImGui.getContentRegionAvail().y;
             ImGui.getWindowDrawList().addLine(lineX, lineY1, lineX, lineY2, ImGui.getColorU32(ImGuiCol.Separator), 1.0f);
@@ -132,22 +132,17 @@ public final class ImGuiConfigScreen extends Screen {
         float btnHeight = s(38);
 
         ImGui.setCursorPosY(s(20));
-
         String[] names = {"Colors", "Inventory"};
 
         for (int i = 0; i < names.length; i++) {
             boolean selected = page == i;
 
             ImGui.setCursorPosX(padding);
-
             if (customSidebarButton(names[i], selected, btnWidth, btnHeight)) {
                 page = i;
             }
             ImGui.spacing();
         }
-
-        // --- Кнопка настроек (Шестеренка) внизу ---
-        // Ставим курсор в самый низ сайдбара
         float bottomY = ImGui.getWindowHeight() - btnHeight - padding;
         ImGui.setCursorPos(padding, bottomY);
 
@@ -163,11 +158,10 @@ public final class ImGuiConfigScreen extends Screen {
         float x = ImGui.getCursorScreenPosX();
         float y = ImGui.getCursorScreenPosY();
 
-        ImGui.invisibleButton("##btn_gear", size, size);
+        ImGui.invisibleButton("##settings", size, size);
         boolean clicked = ImGui.isItemClicked();
         boolean hovered = ImGui.isItemHovered();
 
-        // Фон кнопки
         int bgCol;
         if (selected) {
             bgCol = ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f);
@@ -179,33 +173,19 @@ public final class ImGuiConfigScreen extends Screen {
 
         drawList.addRectFilled(x, y, x + size, y + size, bgCol, s(6));
 
-        // --- ЗАГРУЗКА И ОТРИСОВКА КАРТИНКИ ---
-        // Замените "ваш_mod_id" на реальный ID вашего мода
-        net.minecraft.resources.Identifier gearTexture =
-                net.minecraft.resources.Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");
-
+        Identifier gearTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");
         try {
-            // Получаем OpenGL ID текстуры из Minecraft
-            var texture = Minecraft.getInstance()
-                    .getTextureManager()
-                    .getTexture(gearTexture);
-
+            var texture = Minecraft.getInstance().getTextureManager().getTexture(gearTexture);
             int texId = ((GlTexture) texture.getTexture()).glId();
-
-            // Вычисляем размеры для центрирования картинки внутри кнопки
-            float padding = s(8.0f); // Отступ от краев кнопки
+            float padding = s(8.0f);
             float imgSize = size - (padding * 2);
 
-            // Отрисовываем картинку
             drawList.addImage(texId, x + padding, y + padding, x + padding + imgSize, y + padding + imgSize);
-
         } catch (Exception e) {
-            // Если картинка не найдена, рисуем простой круг в качестве заглушки, чтобы мод не крашился
             float cx = x + size / 2.0f;
             float cy = y + size / 2.0f;
             drawList.addCircle(cx, cy, s(6.0f), ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f), 16, s(2.0f));
         }
-
         return clicked;
     }
 
@@ -226,25 +206,13 @@ public final class ImGuiConfigScreen extends Screen {
         } else {
             bgCol = ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
         }
-
         drawList.addRectFilled(x, y, x + width, y + height, bgCol, s(6));
-
-        if (selected) {
-            // Убрали offsetX, чтобы полоска была вплотную к краю.
-            // Ширину сделали s(4), чтобы она смотрелась более уверенно.
-            // Радиус скругления оставили s(6), как у самой кнопки.
-            drawList.addRectFilled(x, y, x + s(4), y + height, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), s(6), ImDrawFlags.RoundCornersLeft);
-        }
-
+        if (selected) drawList.addRectFilled(x, y, x + s(4), y + height, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), s(6), ImDrawFlags.RoundCornersLeft);
         ImVec2 textSize = ImGui.calcTextSize(label);
         float iconRadius = s(5);
         float iconWidth = iconRadius * 2;
         float spacing = s(14);
-
-        // ФИКСИРОВАННЫЙ ОТСТУП СЛЕВА для иконки (вместо центрирования)
-        // Можешь изменить s(20) на s(18) или s(22), чтобы подобрать идеальный отступ
         float contentStartX = x + s(20);
-
         float iconCenterX = contentStartX + iconRadius;
         float iconCenterY = y + height / 2.0f;
         float textX = contentStartX + iconWidth + spacing;
@@ -257,17 +225,14 @@ public final class ImGuiConfigScreen extends Screen {
             drawList.addRect(iconCenterX - iconRadius, iconCenterY - iconRadius, iconCenterX + iconRadius, iconCenterY + iconRadius, ImGui.getColorU32(0.45f, 0.45f, 0.5f, 1.0f), s(2), 0, s(1.5f));
             drawList.addRectFilled(iconCenterX - iconRadius/2, iconCenterY - iconRadius/2, iconCenterX + iconRadius/2, iconCenterY + iconRadius/2, ImGui.getColorU32(0.45f, 0.45f, 0.5f, 1.0f), s(1));
         }
-
         int textCol = selected ? ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f) : ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f);
         drawList.addText(textX, textY, textCol, label);
-
         return clicked;
     }
 
     private void drawContent() {
         ImGui.beginChild("content", 0, 0, false);
         ImGui.setCursorPos(s(20), s(18));
-
         if (page == 0) drawColors();
         else if (page == 1) drawInventory();
         else if (page == 2) drawGeneralSettings();
@@ -285,13 +250,11 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.spacing();
         ImGui.separator();
 
-        // 1. Включение мода (Используем ImBoolean, как вы и написали)
         ImGui.setCursorPosX(startX);
         ImGui.setWindowFontScale(0.95f);
         ImGui.alignTextToFramePadding();
         ImGui.text("Enable Mod");
         ImGui.setWindowFontScale(1.0f);
-
         ImGui.sameLine(rightColumnX);
         ImBoolean modEnabledBool = new ImBoolean(modEnabled);
         if (ImGui.checkbox("##modEnabled", modEnabledBool)) {
@@ -300,36 +263,29 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.setCursorPosX(startX);
         ImGui.separator();
 
-        // 2. Основной цвет мода (RGB)
         ImGui.setCursorPosX(startX);
         ImGui.setWindowFontScale(0.95f);
         ImGui.alignTextToFramePadding();
         ImGui.text("Main Mod Color");
         ImGui.setWindowFontScale(1.0f);
-
         ImGui.sameLine(rightColumnX);
         ImGui.setNextItemWidth(elementWidth);
         ImGui.colorEdit3("##mainColor", mainColor);
         ImGui.setCursorPosX(startX);
         ImGui.separator();
 
-        // 3. UI Scale (Оставлен только ОДИН слайдер, чтобы убрать ошибку ID)
         ImGui.setCursorPosX(startX);
         ImGui.setWindowFontScale(0.95f);
         ImGui.alignTextToFramePadding();
         ImGui.text("UI Scale");
         ImGui.setWindowFontScale(1.0f);
-
         ImGui.sameLine(rightColumnX);
         ImGui.setNextItemWidth(elementWidth);
-
         float[] scaleArr = {uiScalePercent};
         if (ImGui.sliderFloat("##uiScale", scaleArr, 0.0f, 100.0f, "%.0f%%")) {
             uiScalePercent = scaleArr[0];
-            // Раскомментируйте строку ниже, если UI_SCALE не final в ImGuiRuntime
-            // ImGuiRuntime.UI_SCALE = uiScalePercent / 100.0f;
+            ImGuiRuntime.UI_SCALE = uiScalePercent / 100.0f;
         }
-
         ImGui.setCursorPosX(startX);
         ImGui.separator();
     }
@@ -337,7 +293,6 @@ public final class ImGuiConfigScreen extends Screen {
     private void drawColors() {
         float startX = ImGui.getCursorPosX();
 
-        // --- 1. Render Mode ---
         ImGui.setCursorPosX(startX);
         ImGui.text("Render Mode");
         ImGui.spacing();
@@ -345,8 +300,6 @@ public final class ImGuiConfigScreen extends Screen {
         float rightColumnX = startX + s(190);
         float elementWidth = s(213);
         float rightEdge = rightColumnX + elementWidth;
-
-        // --- 2. Кнопки Tint / Texture ---
         float buttonSpacing = s(8);
         float buttonWidth = (rightEdge - startX - buttonSpacing) / 2.0f;
 
@@ -354,17 +307,15 @@ public final class ImGuiConfigScreen extends Screen {
         if (modeButton("Tint", !textureMode, buttonWidth)) textureMode = false;
         ImGui.sameLine(0, buttonSpacing);
         if (modeButton("Texture", textureMode, buttonWidth)) textureMode = true;
-
         ImGui.spacing();
         ImGui.setCursorPosX(startX);
         ImGui.separator();
-
         ImGui.setCursorPosX(startX);
         ImGui.setWindowFontScale(0.95f);
         ImGui.alignTextToFramePadding();
+
         ImGui.text("Enchantment");
         ImGui.setWindowFontScale(1.0f);
-
         ImGui.sameLine(rightColumnX);
         String[] modes = {
                 "Protection",
@@ -395,16 +346,14 @@ public final class ImGuiConfigScreen extends Screen {
         }
         ImGui.setCursorPosX(startX);
         ImGui.separator();
-
         ImGui.setCursorPosX(startX);
         ImGui.setWindowFontScale(0.95f);
         ImGui.alignTextToFramePadding();
+
         ImGui.text("Enchantment Color");
         ImGui.setWindowFontScale(1.0f);
-
         ImGui.sameLine(rightColumnX);
         ImGui.setNextItemWidth(elementWidth);
-
         if (textureMode) {
             float[] rgbTint = new float[] { tint[0], tint[1], tint[2] };
             if (ImGui.colorEdit3("##tint", rgbTint)) {
@@ -424,11 +373,9 @@ public final class ImGuiConfigScreen extends Screen {
             ImGui.alignTextToFramePadding();
             ImGui.text("Gradient");
             ImGui.setWindowFontScale(1.0f);
-
             float checkboxSize = ImGui.getFrameHeight();
             ImGui.sameLine(rightEdge - checkboxSize);
             ImGui.checkbox("##gradient", gradient);
-
             ImGui.setCursorPosX(startX);
             ImGui.separator();
         }

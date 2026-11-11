@@ -22,7 +22,7 @@ public final class ImGuiRuntime {
     private static boolean initialized;
     private static boolean drawDataReady;
 
-    public static final float UI_SCALE = 0.85f;
+    public static float UI_SCALE = 0.85f;
 
     private ImGuiRuntime() {}
 
