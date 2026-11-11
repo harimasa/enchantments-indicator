@@ -31,13 +31,13 @@ public class ComponentSidebar {
 
         float bottomY = ImGui.getWindowHeight() - btnHeight - padding;
         ImGui.setCursorPos(padding, bottomY);
-        if (customGearButton(btnHeight, config.page == 2)) {
+        if (customSettingsButton(btnHeight, config.page == 2)) {
             config.page = 2;
         }
         ImGui.endChild();
     }
 
-    private static boolean customGearButton(float size, boolean selected) {
+    private static boolean customSettingsButton(float size, boolean selected) {
         ImDrawList drawList = ImGui.getWindowDrawList();
         float x = ImGui.getCursorScreenPosX();
         float y = ImGui.getCursorScreenPosY();

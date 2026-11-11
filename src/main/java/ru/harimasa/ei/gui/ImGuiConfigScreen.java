@@ -2,7 +2,6 @@ package ru.harimasa.ei.gui;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import imgui.ImGui;
-import imgui.flag.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,6 +9,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
+import org.jspecify.annotations.NonNull;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.gui.menu.component.ComponentContent;
 import ru.harimasa.ei.gui.menu.component.ComponentHeader;
@@ -27,7 +27,7 @@ public final class ImGuiConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void render(@NonNull GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         graphics.fill(0, 0, width, height, 0x88000000);
         ImGuiRuntime.beginFrame(width, height);
         ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);

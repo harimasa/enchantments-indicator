@@ -8,6 +8,8 @@ import ru.harimasa.ei.gui.ImGuiRuntime;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public class ComponentSubSettings {
+    private static final float[] tempScaleArr = new float[1];
+
     public static void render(EIConfig config) {
         float startX = ImGui.getCursorPosX();
         float rightColumnX = startX + s(190);
@@ -52,11 +54,12 @@ public class ComponentSubSettings {
         ImGui.setWindowFontScale(1.0f);
         ImGui.sameLine(rightColumnX);
         ImGui.setNextItemWidth(elementWidth);
-        float[] scaleArr = {config.uiScalePercent};
-        if (ImGui.sliderFloat("##uiScale", scaleArr, 50.0f, 100.0f, "%.0f%%")) {
-            config.uiScalePercent = scaleArr[0];
-            ImGuiRuntime.UI_SCALE = config.uiScalePercent / 100.0f;
+        if (!ImGui.isItemActive() && !ImGui.isItemHovered()) tempScaleArr[0] = config.uiScalePercent;
+        if (ImGui.sliderFloat("##uiScale", tempScaleArr, 50.0f, 100.0f, "%.0f%%")) {
+            tempScaleArr[0] = Math.clamp(tempScaleArr[0], 50.0f, 100.0f);
+            config.uiScalePercent = tempScaleArr[0];
         }
+        if (ImGui.isItemDeactivatedAfterEdit()) ImGuiRuntime.UI_SCALE = config.uiScalePercent / 100.0f;
 
         ImGui.setCursorPosX(startX);
         ImGui.separator();
