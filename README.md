@@ -1,7 +1,10 @@
 *LOGO*
 
 # Enchantments Indicator
--> descriptions
+->small descriptions
+
+## About
+->big descriptions
 
 ## Setup
 
