@@ -3,12 +3,12 @@
 	"id": "enchantments-indicator",
 	"version": "${version}",
 	"name": "Enchantments Indicator",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Allows you to see armor enchantments on players",
 	"authors": [
 		"harimasa"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
+		"homepage": "https://modrinth.com/project/enchantments-indicator",
 		"sources": "https://github.com/harimasa/enchantments-indicator"
 	},
 	"license": "MIT License",
