@@ -1,6 +1,7 @@
 package ru.harimasa.ei.gui.menu.component;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiWindowFlags;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.gui.menu.component.sub.ComponentSubColors;
 import ru.harimasa.ei.gui.menu.component.sub.ComponentSubInventory;
@@ -17,7 +18,7 @@ public final class ComponentContent {
         float padding = Math.min(s(18.0f), Math.max(s(8.0f), availableWidth * 0.06f));
         float rightGap = padding + (compact ? 0.0f : s(2.0f));
 
-        ImGui.beginChild("content", -rightGap, 0.0f, false);
+        ImGui.beginChild("content", -rightGap, 0.0f, false, ImGuiWindowFlags.NoScrollbar);
         ImGui.setCursorPos(padding, s(18.0f));
 
         ImGuiUtil.pushFieldSpacing();
