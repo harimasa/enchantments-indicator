@@ -4,11 +4,7 @@ plugins {
 }
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	mavenCentral()
 }
 
 dependencies {
@@ -19,6 +15,19 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
+
+	['', '-opengl', '-glfw'].each {
+		implementation "org.lwjgl:lwjgl$it:$lwjglVersion"
+		implementation "org.lwjgl:lwjgl$it::natives-windows"
+	}
+
+	implementation "io.github.spair:imgui-java-binding:${project.imguiVersion}"
+	implementation "io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}"
+
+	runtimeOnly "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
+	runtimeOnly "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
 }
 
 processResources {

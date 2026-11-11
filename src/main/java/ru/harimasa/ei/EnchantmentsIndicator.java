@@ -1,19 +1,30 @@
 package ru.harimasa.ei;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.KeyMapping;
+import ru.harimasa.ei.gui.ImGuiConfigScreen;
+import ru.harimasa.ei.gui.ImGuiRuntime;
 
 public class EnchantmentsIndicator implements ClientModInitializer {
-	public static final String MOD_ID = "enchantments-indicator";
-
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	private static KeyMapping openMenu;
 
 	@Override
 	public void onInitializeClient() {
+		openMenu = KeyBindingHelper.registerKeyBinding(new KeyMapping("ru.harimasa.ei.open_gui", InputConstants.Type.KEYSYM, InputConstants.KEY_RSHIFT, KeyMapping.Category.MISC));
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			while (openMenu.consumeClick()) {
+				if (client.screen instanceof ImGuiConfigScreen) {
+					client.setScreen(null);
+				} else {
+					client.setScreen(new ImGuiConfigScreen());
+				}
+			}
+		});
 
+		ClientLifecycleEvents.CLIENT_STOPPING.register(client -> ImGuiRuntime.shutdown());
 	}
 }
