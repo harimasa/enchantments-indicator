@@ -1,5 +1,7 @@
 package ru.harimasa.ei.gui;
 
+/* На классы это все потом расхуярить а то это пиздец страшно выглядит фу сука */
+
 import com.mojang.blaze3d.opengl.GlTexture;
 import com.mojang.blaze3d.platform.InputConstants;
 import imgui.ImDrawList;
@@ -51,6 +53,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGuiRuntime.endFrame();
     }
 
+    // тут наверно(пока что)
     private void pushTheme() {
         ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, s(12));
         ImGui.pushStyleVar(ImGuiStyleVar.WindowBorderSize, s(1));
@@ -84,6 +87,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.pushStyleColor(ImGuiCol.SeparatorActive, 0.75f, 0.33f, 1.0f, 1.0f);
     }
 
+    // TODO: gui/menu
     private void drawMenu() {
         float windowWidth = Math.min(s(610), width - s(32));
         float windowHeight = Math.min(s(342), height - s(32));
@@ -107,6 +111,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.end();
     }
 
+    // TODO: gui/menu/component/ComponentHeader
     private void drawHeader() {
         ImGui.beginChild("header", 0, s(45), false);
         ImGui.setCursorPos(s(18), s(13));
@@ -124,6 +129,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.endChild();
     }
 
+    // TODO: gui/menu/component/ComponentSidebar
     private void drawSidebar() {
         ImGui.beginChild("sidebar", s(152), 0, true);
 
@@ -153,6 +159,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.endChild();
     }
 
+    // TODO: gui/menu/component/ComponentSidebar
     private boolean customGearButton(float size, boolean selected) {
         ImDrawList drawList = ImGui.getWindowDrawList();
         float x = ImGui.getCursorScreenPosX();
@@ -189,6 +196,7 @@ public final class ImGuiConfigScreen extends Screen {
         return clicked;
     }
 
+    // думаю тут или gui/menu/component/sub/ComponentSubSettings
     private boolean customSidebarButton(String label, boolean selected, float width, float height) {
         ImDrawList drawList = ImGui.getWindowDrawList();
         float x = ImGui.getCursorScreenPosX();
@@ -230,6 +238,7 @@ public final class ImGuiConfigScreen extends Screen {
         return clicked;
     }
 
+    // here
     private void drawContent() {
         ImGui.beginChild("content", 0, 0, false);
         ImGui.setCursorPos(s(20), s(18));
@@ -240,6 +249,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.endChild();
     }
 
+    // TODO: gui/menu/component/ComponentSettings
     private void drawGeneralSettings() {
         float startX = ImGui.getCursorPosX();
         float rightColumnX = startX + s(190);
@@ -290,6 +300,7 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.separator();
     }
 
+    // TODO: gui/menu/component/sub/ComponentSubColors
     private void drawColors() {
         float startX = ImGui.getCursorPosX();
 
@@ -405,6 +416,7 @@ public final class ImGuiConfigScreen extends Screen {
         return clicked;
     }
 
+    // TODO: gui/menu/component/sub/ComponentSubInventory
     private void drawInventory() {
         ImGui.text("Inventory Visuals");
         ImGui.spacing();
