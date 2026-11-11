@@ -10,6 +10,7 @@ import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.gui.ImGuiConfigScreen;
 import ru.harimasa.ei.gui.ImGuiRuntime;
+import ru.harimasa.ei.lang.Lang;
 import ru.harimasa.ei.render.EIGlintShaders;
 import ru.harimasa.ei.render.EIItemRenderTypes;
 
@@ -19,6 +20,7 @@ public class EnchantmentsIndicator implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ConfigManager.load();
+		Lang.setLanguage(ConfigManager.get().general.language);
 		ImGuiRuntime.setUiScale(ConfigManager.get().general.uiScale / 100.0f);
 		EIGlintShaders.ensureInitialized();
 		EIItemRenderTypes.ensureInitialized();
