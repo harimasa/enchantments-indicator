@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import ru.harimasa.ei.mixin.accessor.BufferSourceAccessor;
 import ru.harimasa.ei.render.EIGlintShaders;
+import ru.harimasa.ei.render.EIItemRenderTypes;
 
 @Mixin(RenderBuffers.class)
 public abstract class RenderBuffersMixin {
@@ -25,9 +26,15 @@ public abstract class RenderBuffersMixin {
 	private MultiBufferSource.BufferSource bufferSource;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
-	private void registerGlintBuffer(int useless, CallbackInfo ci) {
+	private void registerBuffers(int useless, CallbackInfo ci) {
 		SequencedMap<RenderType, ByteBufferBuilder> fixed = ((BufferSourceAccessor) this.bufferSource).fixedBuffers();
-		RenderType type = EIGlintShaders.ARMOR_GLINT;
+		register(fixed, EIGlintShaders.ARMOR_GLINT);
+		for (RenderType type : EIItemRenderTypes.all()) {
+			register(fixed, type);
+		}
+	}
+
+	private static void register(SequencedMap<RenderType, ByteBufferBuilder> fixed, RenderType type) {
 		fixed.putIfAbsent(type, new ByteBufferBuilder(type.bufferSize()));
 	}
 }
