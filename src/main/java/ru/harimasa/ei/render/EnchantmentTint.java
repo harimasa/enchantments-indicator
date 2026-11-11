@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
@@ -24,10 +25,14 @@ public final class EnchantmentTint {
     }
 
     public static boolean hasEnchantment(ItemStack stack, int optionIndex) {
-        ItemEnchantments enchantments = stack.get(DataComponents.ENCHANTMENTS);
-        if (enchantments == null || enchantments.isEmpty()) return false;
-
         var key = EnchantmentOption.byIndex(optionIndex).key();
+        ItemEnchantments enchantments = stack.get(DataComponents.ENCHANTMENTS);
+        ItemEnchantments stored = stack.get(DataComponents.STORED_ENCHANTMENTS);
+        return hasEnchantment(enchantments, key) || hasEnchantment(stored, key);
+    }
+
+    private static boolean hasEnchantment(ItemEnchantments enchantments, ResourceKey<Enchantment> key) {
+        if (enchantments == null || enchantments.isEmpty()) return false;
         for (Holder<Enchantment> enchantment : enchantments.keySet()) {
             if (enchantment.unwrapKey().filter(key::equals).isPresent()) {
                 return enchantments.getLevel(enchantment) > 0;
