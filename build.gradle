@@ -16,10 +16,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
+	implementation platform("org.lwjgl:lwjgl-bom:${project.lwjglVersion}")
 
 	['', '-opengl', '-glfw'].each {
-		implementation "org.lwjgl:lwjgl$it:$lwjglVersion"
+		implementation "org.lwjgl:lwjgl$it:${project.lwjglVersion}"
 		implementation "org.lwjgl:lwjgl$it::natives-windows"
 	}
 
