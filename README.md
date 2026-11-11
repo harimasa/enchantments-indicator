@@ -35,7 +35,7 @@ java >= 21
 Right now it’s only 1.21.11; in the future, it will be 26.x
 
 ## Language
-Currently, only English. Plans include Russian, Ukrainian, and Belarusian, Polska
+English. Plans include Russian, Ukrainian, and Belarusian, Polska
 
 ## Roadmap
 - ~~_best gui_~~
