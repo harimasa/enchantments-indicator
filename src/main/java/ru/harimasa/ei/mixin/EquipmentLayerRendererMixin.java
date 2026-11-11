@@ -41,7 +41,7 @@ public abstract class EquipmentLayerRendererMixin {
 	}
 
 	private static boolean glintActive(EIConfig config, ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Object object) {
-		if (config.colors.renderMode != RenderMode.TINT) return false;
+		if (config.colors.renderMode != RenderMode.GLINT) return false;
 		return EnchantmentTint.applies(config, itemStack, layerType, object);
 	}
 }

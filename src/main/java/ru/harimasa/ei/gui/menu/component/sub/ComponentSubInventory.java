@@ -30,8 +30,8 @@ public final class ComponentSubInventory {
         float buttonGap = s(8.0f);
         float buttonWidth = Math.max(s(40.0f), (availableWidth - buttonGap) * 0.5f);
 
-        if (ImGuiUtil.modeButton("Glint", config.inventory.renderMode == RenderMode.TINT, buttonWidth)) {
-            config.inventory.renderMode = RenderMode.TINT;
+        if (ImGuiUtil.modeButton("Glint", config.inventory.renderMode == RenderMode.GLINT, buttonWidth)) {
+            config.inventory.renderMode = RenderMode.GLINT;
             ConfigManager.markDirty();
         }
         ImGui.sameLine(0.0f, buttonGap);
