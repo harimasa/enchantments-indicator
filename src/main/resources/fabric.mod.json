@@ -9,13 +9,13 @@
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/harimasa/enchantments-indicator"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT License",
 	"icon": "assets/enchantments-indicator/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"client": [
 			"ru.harimasa.ei.EnchantmentsIndicator"
 		]
 	},
