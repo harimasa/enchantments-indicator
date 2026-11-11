@@ -45,3 +45,4 @@ English Russian, Ukrainian, and Belarusian, Polska
 - _~~Custom keybind~~_
 - _~~Language selection dropdown~~_
 - CI/CD
+- _~~modmenu open menu~~_

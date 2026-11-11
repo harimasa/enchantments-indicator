@@ -43,8 +43,7 @@ dependencies {
 	implementation "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
 	include "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
 
-	implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
-}
+	modImplementation "com.terraformersmc:modmenu:${modmenu_version}"}
 
 processResources {
 	def version = project.version

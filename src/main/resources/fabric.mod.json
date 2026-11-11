@@ -18,6 +18,9 @@
 	"entrypoints": {
 		"client": [
 			"ru.harimasa.ei.EnchantmentsIndicator"
+		],
+		"modmenu": [
+			"ru.harimasa.ei.gui.ModMenu"
 		]
 	},
 	"mixins": [
