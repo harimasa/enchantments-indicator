@@ -24,6 +24,15 @@ public final class ImGuiRuntime {
     private static final float MAX_UI_SCALE = 2.00f;
     private static final float BASE_FONT_SIZE = 16.0f;
 
+    private static final short[] GLYPH_RANGES = {
+            0x0020, 0x00FF,
+            0x0100, 0x017F,
+            0x0400, 0x052F,
+            0x2000, 0x206F,
+            0x20AC, 0x20AC,
+            0
+    };
+
     private static final ImGuiImplGl3 RENDERER = new ImGuiImplGl3();
 
     private static boolean initialized;
@@ -59,9 +68,8 @@ public final class ImGuiRuntime {
 
     private static void loadFont() {
         ImFontAtlas fonts = ImGui.getIO().getFonts();
-        short[] glyphRanges = fonts.getGlyphRangesCyrillic();
-        addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Medium.ttf", glyphRanges);
-        boldFont = addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Bold.ttf", glyphRanges);
+        addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Medium.ttf", GLYPH_RANGES);
+        boldFont = addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Bold.ttf", GLYPH_RANGES);
     }
 
     private static ImFont addFont(ImFontAtlas fonts, String path, short[] glyphRanges) {
