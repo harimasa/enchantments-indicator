@@ -43,6 +43,6 @@ public final class ComponentSubInventory {
         ImGuiUtil.rowSeparator(startX);
 
         ImGui.spacing();
-        ImGuiUtil.note("Placeholder for now." + " Inventory highlighter in the future", startX);
+        ImGuiUtil.note(config.inventory.renderMode == RenderMode.GLINT ? "Glint recolors the enchantment glint on items in the inventory and in hands." : "Texture recolors the item texture in the inventory and in hands.", startX);
     }
 }
