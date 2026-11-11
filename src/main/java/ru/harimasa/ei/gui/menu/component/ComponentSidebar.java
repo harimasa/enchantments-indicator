@@ -148,7 +148,7 @@ public final class ComponentSidebar {
             drawList.addRect(x, y, x + size, y + size, ImGuiTheme.accentColorU32(), s(6.0f), 0, Math.max(1.0f, s(1.0f)));
         }
 
-        Identifier settingsTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.jpg");
+        Identifier settingsTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");
         try {
             var texture = Minecraft.getInstance().getTextureManager().getTexture(settingsTexture);
             int texId = ((GlTexture) texture.getTexture()).glId();
