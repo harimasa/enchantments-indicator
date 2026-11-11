@@ -9,6 +9,7 @@
 ## Setup
 
 ## License
+MIT License
 
 ## Credits
 The mod was created by harimasa. But also:
