@@ -45,5 +45,5 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian, Polsk
 - _~~Config~~_
 - Logo
 - _~~Custom keybind~~_
-- Language selection dropdown
+- _~~Language selection dropdown~~_
 - CI/CD
