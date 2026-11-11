@@ -14,7 +14,9 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.NonNull;
+import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
+import ru.harimasa.ei.config.WindowPosition;
 import ru.harimasa.ei.gui.menu.component.ComponentContent;
 import ru.harimasa.ei.gui.menu.component.ComponentHeader;
 import ru.harimasa.ei.gui.menu.component.ComponentSidebar;
@@ -23,7 +25,6 @@ import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ImGuiConfigScreen extends Screen {
-
     private static final float MAX_WINDOW_WIDTH = 610.0f;
     private static final float MAX_WINDOW_HEIGHT = 342.0f;
     private static final float MIN_WINDOW_WIDTH = 260.0f;
@@ -31,7 +32,7 @@ public final class ImGuiConfigScreen extends Screen {
 
     private static final float WINDOW_BG_INSET = 0.75f;
 
-    private final EIConfig config = new EIConfig();
+    private final EIConfig config = ConfigManager.get();
 
     private int lastScreenWidth = -1;
     private int lastScreenHeight = -1;
@@ -42,7 +43,12 @@ public final class ImGuiConfigScreen extends Screen {
 
     public ImGuiConfigScreen() {
         super(Component.literal("Enchantments Indicator"));
-        config.uiScalePercent = Math.max(50.0f, Math.min(100.0f, Math.round(ImGuiRuntime.UI_SCALE * 100.0f)));
+
+        WindowPosition savedPosition = config.general.window;
+        if (savedPosition.saved) {
+            windowX = savedPosition.x;
+            windowY = savedPosition.y;
+        }
     }
 
     @Override
@@ -62,17 +68,22 @@ public final class ImGuiConfigScreen extends Screen {
         windowWidth = Math.min(windowWidth, Math.max(1.0f, width - s(8.0f)));
         windowHeight = Math.min(windowHeight, Math.max(1.0f, height - s(8.0f)));
 
+        boolean firstFrame = lastScreenWidth < 0 || lastScreenHeight < 0;
         boolean screenChanged = width != lastScreenWidth || height != lastScreenHeight;
-        if (screenChanged || Float.isNaN(windowX) || Float.isNaN(windowY)) {
+
+        if (Float.isNaN(windowX) || Float.isNaN(windowY) || (screenChanged && !firstFrame)) {
             windowX = (width - windowWidth) * 0.5f;
             windowY = (height - windowHeight) * 0.5f;
-            lastScreenWidth = width;
-            lastScreenHeight = height;
         }
 
+        lastScreenWidth = width;
+        lastScreenHeight = height;
+
+        boolean dragJustEnded = false;
         if (draggingWindow) {
             if (!ImGui.isMouseDown(0)) {
                 draggingWindow = false;
+                dragJustEnded = true;
             } else {
                 windowX += ImGui.getIO().getMouseDeltaX();
                 windowY += ImGui.getIO().getMouseDeltaY();
@@ -80,6 +91,10 @@ public final class ImGuiConfigScreen extends Screen {
         }
         windowX = Math.max(0.0f, Math.min(windowX, Math.max(0.0f, width - windowWidth)));
         windowY = Math.max(0.0f, Math.min(windowY, Math.max(0.0f, height - windowHeight)));
+
+        if (dragJustEnded) {
+            saveWindowPosition();
+        }
 
         ImGui.setNextWindowPos(windowX, windowY, ImGuiCond.Always);
         ImGui.setNextWindowSize(windowWidth, windowHeight, ImGuiCond.Always);
@@ -178,6 +193,25 @@ public final class ImGuiConfigScreen extends Screen {
     @Override
     public void onClose() {
         Minecraft.getInstance().setScreen(null);
+    }
+
+    @Override
+    public void removed() {
+        saveWindowPosition();
+        ConfigManager.save();
+        super.removed();
+    }
+
+    private void saveWindowPosition() {
+        if (!Float.isFinite(windowX) || !Float.isFinite(windowY)) return;
+
+        WindowPosition position = config.general.window;
+        if (position.saved && position.x == windowX && position.y == windowY) return;
+
+        position.saved = true;
+        position.x = windowX;
+        position.y = windowY;
+        ConfigManager.markDirty();
     }
 
     @Override
