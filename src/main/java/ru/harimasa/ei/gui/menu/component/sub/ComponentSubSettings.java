@@ -4,9 +4,12 @@ import imgui.ImGui;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.config.GeneralConfig;
+import ru.harimasa.ei.config.enums.LanguageOption;
 import ru.harimasa.ei.gui.ImGuiRuntime;
 import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
 import ru.harimasa.ei.lang.Lang;
+
+import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentSubSettings {
     private static final float[] tempScale = new float[1];
@@ -51,8 +54,20 @@ public final class ComponentSubSettings {
             ImGuiRuntime.setUiScale(config.general.uiScale / 100.0f);
             ConfigManager.markDirty();
         }
-        ImGuiUtil.rowSeparator(startX);
 
+        ImGui.setCursorPosX(startX);
+        ImGui.text(Lang.get("ei.settings.language"));
+        ImGui.setCursorPosX(startX);
+        float languageWidth = Math.max(s(1.0f), ImGui.getContentRegionAvail().x);
+        LanguageOption currentLanguage = LanguageOption.byCode(config.general.language);
+        if (currentLanguage == null) currentLanguage = LanguageOption.fromCodeOrDefault(Lang.currentCode());
+        LanguageOption pickedLanguage = ImGuiUtil.languageDropdown("language", currentLanguage, languageWidth);
+        if (pickedLanguage != null && pickedLanguage != currentLanguage) {
+            config.general.language = pickedLanguage.code();
+            Lang.setLanguage(pickedLanguage.code());
+            ConfigManager.markDirty();
+        }
+        ImGuiUtil.rowSeparator(startX);
         ImGui.spacing();
         ImGuiUtil.note(Lang.get("ei.settings.note"), startX);
     }
