@@ -1,67 +1,54 @@
 package ru.harimasa.ei.gui.menu.component.sub;
 
 import imgui.ImGui;
-import imgui.type.ImBoolean;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.gui.ImGuiRuntime;
+import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
 
-import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
+public final class ComponentSubSettings {
 
-public class ComponentSubSettings {
-    private static final float[] tempScaleArr = new float[1];
+    private static final float MIN_SCALE_PERCENT = 50.0f;
+    private static final float MAX_SCALE_PERCENT = 100.0f;
+
+    private static final float[] tempScale = new float[1];
+    private static boolean scaleInteracting;
+
+    private ComponentSubSettings() {}
 
     public static void render(EIConfig config) {
         float startX = ImGui.getCursorPosX();
-        float rightColumnX = startX + s(190);
-        float elementWidth = s(213);
 
         ImGui.setCursorPosX(startX);
         ImGui.text("General Settings");
         ImGui.spacing();
-        ImGui.separator();
+        ImGuiUtil.rowSeparator(startX);
 
-        // Enable Mod
-        ImGui.setCursorPosX(startX);
-        ImGui.setWindowFontScale(0.95f);
-        ImGui.alignTextToFramePadding();
-        ImGui.text("Enable Mod");
-        ImGui.setWindowFontScale(1.0f);
-        ImGui.sameLine(rightColumnX);
-        ImBoolean modEnabledBool = new ImBoolean(config.modEnabled);
-        if (ImGui.checkbox("##modEnabled", modEnabledBool)) config.modEnabled = modEnabledBool.get();
+        ImGuiUtil.formCheckbox("Enable Mod", "##modEnabled", config.modEnabled, startX, value -> config.modEnabled = value);
+        ImGuiUtil.rowSeparator(startX);
 
-        ImGui.setCursorPosX(startX);
-        ImGui.separator();
-
-        // Main Color
-        ImGui.setCursorPosX(startX);
-        ImGui.setWindowFontScale(0.95f);
-        ImGui.alignTextToFramePadding();
-        ImGui.text("Main Mod Color");
-        ImGui.setWindowFontScale(1.0f);
-        ImGui.sameLine(rightColumnX);
-        ImGui.setNextItemWidth(elementWidth);
+        ImGuiUtil.formLabel("Main Mod Color", startX);
+        ImGuiUtil.formControlWidth();
         ImGui.colorEdit3("##mainColor", config.mainColor);
+        ImGuiUtil.rowSeparator(startX);
 
-        ImGui.setCursorPosX(startX);
-        ImGui.separator();
+        ImGuiUtil.formLabel("UI Scale", startX);
+        ImGuiUtil.formControlWidth();
 
-        // UI Scale
-        ImGui.setCursorPosX(startX);
-        ImGui.setWindowFontScale(0.95f);
-        ImGui.alignTextToFramePadding();
-        ImGui.text("UI Scale");
-        ImGui.setWindowFontScale(1.0f);
-        ImGui.sameLine(rightColumnX);
-        ImGui.setNextItemWidth(elementWidth);
-        if (!ImGui.isItemActive() && !ImGui.isItemHovered()) tempScaleArr[0] = config.uiScalePercent;
-        if (ImGui.sliderFloat("##uiScale", tempScaleArr, 50.0f, 100.0f, "%.0f%%")) {
-            tempScaleArr[0] = Math.clamp(tempScaleArr[0], 50.0f, 100.0f);
-            config.uiScalePercent = tempScaleArr[0];
+        if (!scaleInteracting) {
+            tempScale[0] = config.uiScalePercent;
         }
-        if (ImGui.isItemDeactivatedAfterEdit()) ImGuiRuntime.UI_SCALE = config.uiScalePercent / 100.0f;
 
-        ImGui.setCursorPosX(startX);
-        ImGui.separator();
+        boolean scaleChanged = ImGui.sliderFloat("##uiScale", tempScale, MIN_SCALE_PERCENT, MAX_SCALE_PERCENT, "%.0f%%");
+        scaleInteracting = ImGui.isItemActive() || ImGui.isItemHovered();
+        if (scaleChanged) {
+            config.uiScalePercent = Math.clamp(tempScale[0], MIN_SCALE_PERCENT, MAX_SCALE_PERCENT);
+        }
+
+        if (ImGui.isItemDeactivatedAfterEdit()) {
+            ImGuiRuntime.setUiScale(config.uiScalePercent / 100.0f);
+        }
+        ImGuiUtil.rowSeparator(startX);
+        ImGui.spacing();
+        ImGuiUtil.note("UI scale changes the size of the whole menu. " + "It is applied when you release the slider.", startX);
     }
 }
