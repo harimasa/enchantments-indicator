@@ -1,7 +1,6 @@
 package ru.harimasa.ei.config;
 
 public final class EIConfig {
-
     public GeneralConfig general = new GeneralConfig();
     public ColorsConfig colors = new ColorsConfig();
     public InventoryConfig inventory = new InventoryConfig();

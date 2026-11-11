@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public final class ConfigManager {
-
     private static final Logger LOGGER = LoggerFactory.getLogger("enchantments-indicator");
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()

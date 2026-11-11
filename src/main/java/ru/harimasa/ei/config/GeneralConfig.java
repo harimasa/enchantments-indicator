@@ -1,7 +1,6 @@
 package ru.harimasa.ei.config;
 
 public final class GeneralConfig {
-
     public static final float MIN_UI_SCALE = 50.0f;
     public static final float MAX_UI_SCALE = 100.0f;
 
