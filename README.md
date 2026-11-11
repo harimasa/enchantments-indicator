@@ -18,16 +18,14 @@
 <a href="https://discord.com/users/1265171544049717279">
   <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/discord.png?raw=true" alt="Discord" width="50"/></a>
 
-# Enchantments Indicator
-->small descriptions
-
 ## About
-->big descriptions
+This mod replaces the **standard, flat glow effect** on enchanted armor with **fully customizable visual effects**. You can freely change the *color of the armor textures* or the *glow itself*, making it easy to instantly identify specific enchantments on other players' gear.
+
+The mod supports **multi-color gradients** for the glow effect. These visual changes extend beyond the character model: the recolored textures and tinted glows also appear on items within your inventory, making it easier than ever to sort and distinguish between pieces of equipment. The mod is fully localized and supports five languages: **English, Russian, Ukrainian, Belarusian, and Polish**.
+
+> **Note:** As this mod is purely visual and operates entirely on the `client-side`, it **does not need to be installed on the server** — it functions correctly in any gameplay environment.
 
 ## Preview
-
-## License
-MIT License
 
 ## Credits
 Created by **harimasa**. Special thanks to:
@@ -39,9 +37,9 @@ Created by **harimasa**. Special thanks to:
 - Moral supps [drimbik](https://github.com/drimbik).
 - [Github](https://github.com/harimasa/perfect-icons-trust-me) behind the host of beautiful icons
 
-## FAQ
-
 ## Features
+**Enchantments Indicator** - is a highly customizable visual utility mod
+that allows you to instantly recognize enchantments on player armor and items without opening inventories.
 
 ## Dependencies
 
@@ -82,3 +80,6 @@ Created by **harimasa**. Special thanks to:
 - CI/CD
 - liquid glass
 - _~~modmenu open menu~~_
+
+## License
+The mod is licensed under the MIT license. Link to [MIT License](https://github.com/harimasa/enchantments-indicator/blob/master/LICENSE)
