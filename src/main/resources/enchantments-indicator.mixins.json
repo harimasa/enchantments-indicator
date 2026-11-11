@@ -3,7 +3,7 @@
 	"package": "ru.harimasa.ei.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"BufferSourceAccessor",
+		"accessor.BufferSourceAccessor",
 		"EquipmentLayerRendererMixin",
 		"GameRendererMixin",
 		"RenderBuffersMixin",
