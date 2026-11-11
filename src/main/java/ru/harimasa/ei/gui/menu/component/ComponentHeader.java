@@ -51,15 +51,22 @@ public final class ComponentHeader {
 
         boolean closeClicked = ImGui.button("##close", closeSize, closeSize);
         boolean closeHovered = ImGui.isItemHovered();
+        float closeRectMinX = ImGui.getItemRectMinX();
+        float closeRectMinY = ImGui.getItemRectMinY();
+        float closeRectMaxX = ImGui.getItemRectMaxX();
+        float closeRectMaxY = ImGui.getItemRectMaxY();
 
         ImGui.popStyleVar(1);
         ImGui.popStyleColor(3);
 
         float inset = Math.round(closeSize * 0.33f);
+        float arm = closeSize * 0.5f - inset;
         int closeColor = closeHovered ? ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f) : ImGui.getColorU32(0.78f, 0.78f, 0.84f, 1.0f);
         float crossThickness = Math.max(1.0f, s(1.5f));
-        drawList.addLine(closeX + inset, closeY + inset, closeX + closeSize - inset, closeY + closeSize - inset, closeColor, crossThickness);
-        drawList.addLine(closeX + inset, closeY + closeSize - inset, closeX + closeSize - inset, closeY + inset, closeColor, crossThickness);
+        float centerX = (closeRectMinX + closeRectMaxX) * 0.5f - 0.5f;
+        float centerY = (closeRectMinY + closeRectMaxY) * 0.5f - 0.5f;
+        drawList.addLine(centerX - arm, centerY - arm, centerX + arm, centerY + arm, closeColor, crossThickness);
+        drawList.addLine(centerX - arm, centerY + arm, centerX + arm, centerY - arm, closeColor, crossThickness);
 
         if (closeClicked) Minecraft.getInstance().setScreen(null);
         ImGui.setCursorScreenPos(x, y + height);
