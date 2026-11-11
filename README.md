@@ -1,35 +1,7 @@
-![LOGO](src/main/resources/assets/enchantments-indicator/icon.png/)
+<p align="center">
+  <img src="src/main/resources/assets/enchantments-indicator/icon.png" alt="LOGO">
+</p>
 
-# Enchantments Indicator
-->small descriptions
-
-## About
-->big descriptions
-
-## Preview
-
-## License
-MIT License
-
-<details>
-<summary>Credits</summary>
-
-Created by **harimasa**. Special thanks to:
-
-- GUI inspired by [NoboKik](https://github.com/NoboKik) using ImGui.
-- [imgui-java](https://github.com/SpaiR/imgui-java) for providing ImGui bindings for Java.
-- [Magnific](https://www.magnific.com) for the flag icons.
-- Art is inspired by [ImPiglet](https://modrinth.com/user/ImPiglet).
-- Moral supps [drimbik](https://github.com/drimbik).
-- [Github](https://github.com/harimasa/perfect-icons-trust-me) behind the host of beautiful icons
-
-</details>
-
-## FAQ
-
-## Features
-
-## Links
 <p align="center">
 <a href="https://github.com/harimasa/enchantments-indicator">
   <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/github.png?raw=true" alt="Github" width="43"/></a>
@@ -45,6 +17,31 @@ Created by **harimasa**. Special thanks to:
 
 <a href="https://discord.com/users/1265171544049717279">
   <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/discord.png?raw=true" alt="Discord" width="50"/></a>
+
+# Enchantments Indicator
+->small descriptions
+
+## About
+->big descriptions
+
+## Preview
+
+## License
+MIT License
+
+## Credits
+Created by **harimasa**. Special thanks to:
+
+- GUI inspired by [NoboKik](https://github.com/NoboKik) using ImGui.
+- [imgui-java](https://github.com/SpaiR/imgui-java) for providing ImGui bindings for Java.
+- [Magnific](https://www.magnific.com) for the flag icons.
+- Art is inspired by [ImPiglet](https://modrinth.com/user/ImPiglet).
+- Moral supps [drimbik](https://github.com/drimbik).
+- [Github](https://github.com/harimasa/perfect-icons-trust-me) behind the host of beautiful icons
+
+## FAQ
+
+## Features
 
 ## Dependencies
 
