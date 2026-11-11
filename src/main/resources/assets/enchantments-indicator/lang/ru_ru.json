@@ -4,18 +4,19 @@
 
   "ei.menu.title": "Enchantments Indicator",
 
-  "ei.page.colors": "Цвета",
-  "ei.page.inventory": "Инвентарь",
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
 
-  "ei.settings.title": "Общие настройки",
+  "ei.settings.title": "General Settings",
   "ei.settings.enable_mod": "Включить мод",
   "ei.settings.main_color": "Основной цвет",
   "ei.settings.ui_scale": "Масштаб интерфейса",
+  "ei.settings.language": "Язык",
   "ei.settings.note": "Основные настройки мода. Применяются автоматически после изменений.",
 
-  "ei.colors.title": "Режим отображения",
-  "ei.colors.mode.glint": "Блеск",
-  "ei.colors.mode.texture": "Текстура",
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
   "ei.colors.enchantment": "Зачарование",
   "ei.colors.gradient": "Градиент",
   "ei.colors.color": "Цвет зачарования",
@@ -27,7 +28,7 @@
   "ei.colors.note.glint": "Блеск заменяет блеск зачарования. Градиент смешивает цвета «От» (сверху) и «До» (снизу). Интенсивность регулирует свечение.",
   "ei.colors.note.texture": "Текстура перекрашивает саму броню при наличии выбранного зачарования.",
 
-  "ei.inventory.title": "Визуализация инвентаря",
+  "ei.inventory.title": "Inventory Visuals",
   "ei.inventory.enable": "Включить",
   "ei.inventory.render_mode": "Режим отображения",
   "ei.inventory.note.glint": "Блеск перекрашивает блеск зачарования на предметах в инвентаре и в руках.",

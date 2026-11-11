@@ -1,0 +1,53 @@
+{
+  "key.category.enchantments-indicator.main": "Enchantments Indicator",
+  "key.enchantments-indicator.open_gui": "Otwórz menu Enchantments Indicator",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
+
+  "ei.settings.title": "General Settings",
+  "ei.settings.enable_mod": "Włącz mod",
+  "ei.settings.main_color": "Kolor główny",
+  "ei.settings.ui_scale": "Skala interfejsu",
+  "ei.settings.language": "Język",
+  "ei.settings.note": "Główne ustawienia moda. Zmiany są stosowane automatycznie.",
+
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
+  "ei.colors.enchantment": "Zaklęcie",
+  "ei.colors.gradient": "Gradient",
+  "ei.colors.color": "Kolor zaklęcia",
+  "ei.colors.intensity": "Intensywność",
+  "ei.colors.from": "Od",
+  "ei.colors.to": "Do",
+  "ei.colors.from_tooltip": "Od (góra)",
+  "ei.colors.to_tooltip": "Do (dół)",
+  "ei.colors.note.glint": "Połysk zastępuje poświatę zaklęcia. Gradient przechodzi od „Od” (góra) do „Do” (dół). Intensywność skaluje blask.",
+  "ei.colors.note.texture": "Tekstura przemalowuje samą zbroję, gdy obecne jest wybrane zaklęcie.",
+
+  "ei.inventory.title": "Inventory Visuals",
+  "ei.inventory.enable": "Włącz",
+  "ei.inventory.render_mode": "Tryb renderowania",
+  "ei.inventory.note.glint": "Połysk przemalowuje poświatę zaklęcia na przedmiotach w ekwipunku i w dłoniach.",
+  "ei.inventory.note.texture": "Tekstura przemalowuje teksturę przedmiotu w ekwipunku i w dłoniach.",
+
+  "ei.enchantment.protection": "Ochrona",
+  "ei.enchantment.fire_protection": "Ochrona przed ogniem",
+  "ei.enchantment.blast_protection": "Ochrona przed wybuchem",
+  "ei.enchantment.projectile_protection": "Ochrona przed pociskami",
+  "ei.enchantment.unbreaking": "Niezniszczalność",
+  "ei.enchantment.mending": "Naprawa",
+  "ei.enchantment.thorns": "Ciernie",
+  "ei.enchantment.binding_curse": "Klątwa uwiązania",
+  "ei.enchantment.vanishing_curse": "Klątwa znikania",
+  "ei.enchantment.respiration": "Oddychanie",
+  "ei.enchantment.aqua_affinity": "Wydajność pod wodą",
+  "ei.enchantment.swift_sneak": "Przemykanie",
+  "ei.enchantment.feather_falling": "Łagodny upadek",
+  "ei.enchantment.depth_strider": "Głębinowy wędrowiec",
+  "ei.enchantment.frost_walker": "Mroźny piechur",
+  "ei.enchantment.soul_speed": "Prędkość dusz"
+}

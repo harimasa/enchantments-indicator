@@ -1,0 +1,53 @@
+{
+  "key.category.enchantments-indicator.main": "Enchantments Indicator",
+  "key.enchantments-indicator.open_gui": "Enchantments-Indicator-Menü öffnen",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
+
+  "ei.settings.title": "General Settings",
+  "ei.settings.enable_mod": "Mod aktivieren",
+  "ei.settings.main_color": "Hauptfarbe",
+  "ei.settings.ui_scale": "UI-Skalierung",
+  "ei.settings.language": "Sprache",
+  "ei.settings.note": "Haupteinstellungen des Mods. Änderungen werden automatisch übernommen.",
+
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
+  "ei.colors.enchantment": "Verzauberung",
+  "ei.colors.gradient": "Verlauf",
+  "ei.colors.color": "Verzauberungsfarbe",
+  "ei.colors.intensity": "Intensität",
+  "ei.colors.from": "Von",
+  "ei.colors.to": "Bis",
+  "ei.colors.from_tooltip": "Von (oben)",
+  "ei.colors.to_tooltip": "Bis (unten)",
+  "ei.colors.note.glint": "Glanz ersetzt den Verzauberungsglanz. Der Verlauf mischt „Von“ (oben) in „Bis“ (unten). Die Intensität skaliert das Leuchten.",
+  "ei.colors.note.texture": "Textur färbt die Rüstung selbst um, wenn die ausgewählte Verzauberung vorhanden ist.",
+
+  "ei.inventory.title": "Inventory Visuals",
+  "ei.inventory.enable": "Aktivieren",
+  "ei.inventory.render_mode": "Anzeigemodus",
+  "ei.inventory.note.glint": "Glanz färbt den Verzauberungsglanz von Gegenständen im Inventar und in den Händen um.",
+  "ei.inventory.note.texture": "Textur färbt die Gegenstandstextur im Inventar und in den Händen um.",
+
+  "ei.enchantment.protection": "Schutz",
+  "ei.enchantment.fire_protection": "Feuerschutz",
+  "ei.enchantment.blast_protection": "Explosionsschutz",
+  "ei.enchantment.projectile_protection": "Schussschutz",
+  "ei.enchantment.unbreaking": "Haltbarkeit",
+  "ei.enchantment.mending": "Reparatur",
+  "ei.enchantment.thorns": "Dornen",
+  "ei.enchantment.binding_curse": "Fluch der Bindung",
+  "ei.enchantment.vanishing_curse": "Fluch des Verschwindens",
+  "ei.enchantment.respiration": "Atmung",
+  "ei.enchantment.aqua_affinity": "Wasseraffinität",
+  "ei.enchantment.swift_sneak": "Huschen",
+  "ei.enchantment.feather_falling": "Federfall",
+  "ei.enchantment.depth_strider": "Wasserläufer",
+  "ei.enchantment.frost_walker": "Eisläufer",
+  "ei.enchantment.soul_speed": "Seelenläufer"
+}

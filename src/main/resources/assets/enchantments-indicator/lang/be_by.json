@@ -1,0 +1,53 @@
+{
+  "key.category.enchantments-indicator.main": "Enchantments Indicator",
+  "key.enchantments-indicator.open_gui": "Адкрыць меню Enchantments Indicator",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
+
+  "ei.settings.title": "General Settings",
+  "ei.settings.enable_mod": "Уключыць мод",
+  "ei.settings.main_color": "Асноўны колер",
+  "ei.settings.ui_scale": "Маштаб інтэрфейсу",
+  "ei.settings.language": "Мова",
+  "ei.settings.note": "Асноўныя налады мода. Прымяняюцца аўтаматычна пасля змен.",
+
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
+  "ei.colors.enchantment": "Зачараванне",
+  "ei.colors.gradient": "Градыент",
+  "ei.colors.color": "Колер зачаравання",
+  "ei.colors.intensity": "Інтэнсіўнасць",
+  "ei.colors.from": "Ад",
+  "ei.colors.to": "Да",
+  "ei.colors.from_tooltip": "Ад (верх)",
+  "ei.colors.to_tooltip": "Да (ніз)",
+  "ei.colors.note.glint": "Бляск замяняе бляск зачаравання. Градыент змешвае «Ад» (зверху) і «Да» (знізу). Інтэнсіўнасць рэгулюе свячэнне.",
+  "ei.colors.note.texture": "Тэкстура перафарбоўвае саму броню пры наяўнасці выбранага зачаравання.",
+
+  "ei.inventory.title": "Inventory Visuals",
+  "ei.inventory.enable": "Уключыць",
+  "ei.inventory.render_mode": "Рэжым адлюстравання",
+  "ei.inventory.note.glint": "Бляск перафарбоўвае бляск зачаравання на прадметах у інвентары і ў руках.",
+  "ei.inventory.note.texture": "Тэкстура перафарбоўвае тэкстуру прадмета ў інвентары і ў руках.",
+
+  "ei.enchantment.protection": "Ахова",
+  "ei.enchantment.fire_protection": "Ахова ад агню",
+  "ei.enchantment.blast_protection": "Ахова ад выбухаў",
+  "ei.enchantment.projectile_protection": "Ахова ад снарадаў",
+  "ei.enchantment.unbreaking": "Мацунак",
+  "ei.enchantment.mending": "Рамонт",
+  "ei.enchantment.thorns": "Калючкі",
+  "ei.enchantment.binding_curse": "Праклён няздымнасці",
+  "ei.enchantment.vanishing_curse": "Праклён знікнення",
+  "ei.enchantment.respiration": "Падводнае дыханне",
+  "ei.enchantment.aqua_affinity": "Водападобнасць",
+  "ei.enchantment.swift_sneak": "Спрыт",
+  "ei.enchantment.feather_falling": "Бязважкасць",
+  "ei.enchantment.depth_strider": "Падводнік",
+  "ei.enchantment.frost_walker": "Марозны поступ",
+  "ei.enchantment.soul_speed": "Хуткасць душы"
+}

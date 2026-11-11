@@ -1,0 +1,53 @@
+{
+  "key.category.enchantments-indicator.main": "Enchantments Indicator",
+  "key.enchantments-indicator.open_gui": "Відкрити меню Enchantments Indicator",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
+
+  "ei.settings.title": "General Settings",
+  "ei.settings.enable_mod": "Увімкнути мод",
+  "ei.settings.main_color": "Основний колір",
+  "ei.settings.ui_scale": "Масштаб інтерфейсу",
+  "ei.settings.language": "Мова",
+  "ei.settings.note": "Основні налаштування мода. Застосовуються автоматично після змін.",
+
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
+  "ei.colors.enchantment": "Зачарування",
+  "ei.colors.gradient": "Градієнт",
+  "ei.colors.color": "Колір зачарування",
+  "ei.colors.intensity": "Інтенсивність",
+  "ei.colors.from": "Від",
+  "ei.colors.to": "До",
+  "ei.colors.from_tooltip": "Від (верх)",
+  "ei.colors.to_tooltip": "До (низ)",
+  "ei.colors.note.glint": "Блиск замінює блиск зачарування. Градієнт змішує «Від» (зверху) і «До» (знизу). Інтенсивність регулює світіння.",
+  "ei.colors.note.texture": "Текстура перефарбовує саму броню за наявності вибраного зачарування.",
+
+  "ei.inventory.title": "Inventory Visuals",
+  "ei.inventory.enable": "Увімкнути",
+  "ei.inventory.render_mode": "Режим відображення",
+  "ei.inventory.note.glint": "Блиск перефарбовує блиск зачарування на предметах в інвентарі та в руках.",
+  "ei.inventory.note.texture": "Текстура перефарбовує текстуру предмета в інвентарі та в руках.",
+
+  "ei.enchantment.protection": "Захист",
+  "ei.enchantment.fire_protection": "Захист від вогню",
+  "ei.enchantment.blast_protection": "Захист від вибухів",
+  "ei.enchantment.projectile_protection": "Захист від снарядів",
+  "ei.enchantment.unbreaking": "Незламність",
+  "ei.enchantment.mending": "Лагодження",
+  "ei.enchantment.thorns": "Шипи",
+  "ei.enchantment.binding_curse": "Прокляття прив'язування",
+  "ei.enchantment.vanishing_curse": "Прокляття зникнення",
+  "ei.enchantment.respiration": "Дихання",
+  "ei.enchantment.aqua_affinity": "Рідність води",
+  "ei.enchantment.swift_sneak": "Біг крадькома",
+  "ei.enchantment.feather_falling": "Невагомість",
+  "ei.enchantment.depth_strider": "Глибинний бігун",
+  "ei.enchantment.frost_walker": "Льодохід",
+  "ei.enchantment.soul_speed": "Швидкість душ"
+}

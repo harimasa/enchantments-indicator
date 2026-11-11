@@ -11,6 +11,7 @@
   "ei.settings.enable_mod": "Enable Mod",
   "ei.settings.main_color": "Main Color",
   "ei.settings.ui_scale": "UI Scale",
+  "ei.settings.language": "Language",
   "ei.settings.note": "Main mod settings. Applied automatically after any changes.",
 
   "ei.colors.title": "Render Mode",
