@@ -6,15 +6,16 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.gui.ImGuiConfigScreen;
 import ru.harimasa.ei.gui.ImGuiRuntime;
 
 public class EnchantmentsIndicator implements ClientModInitializer {
-	private static KeyMapping openMenu;
+	private static final KeyMapping.Category EI_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath("enchantments-indicator", "main"));
 
 	@Override
 	public void onInitializeClient() {
-		openMenu = KeyBindingHelper.registerKeyBinding(new KeyMapping("ru.harimasa.ei.open_gui", InputConstants.Type.KEYSYM, InputConstants.KEY_RSHIFT, KeyMapping.Category.MISC));
+		KeyMapping openMenu = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.enchantments-indicator.open_gui", InputConstants.Type.KEYSYM, InputConstants.KEY_RSHIFT, EI_CATEGORY));
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (openMenu.consumeClick()) {
 				if (client.screen instanceof ImGuiConfigScreen) {
@@ -24,7 +25,6 @@ public class EnchantmentsIndicator implements ClientModInitializer {
 				}
 			}
 		});
-
 		ClientLifecycleEvents.CLIENT_STOPPING.register(client -> ImGuiRuntime.shutdown());
 	}
 }
