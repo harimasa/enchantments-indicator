@@ -6,6 +6,8 @@ import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.opengl.GlTexture;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
+import imgui.ImFont;
+import imgui.ImFontAtlas;
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.ImGuiStyle;
@@ -33,6 +35,7 @@ public final class ImGuiRuntime {
     private static float pendingScale = Float.NaN;
 
     private static BaseStyle baseStyle;
+    private static ImFont boldFont;
 
     private ImGuiRuntime() {}
 
@@ -55,18 +58,28 @@ public final class ImGuiRuntime {
     }
 
     private static void loadFont() {
-        String path = "/assets/enchantments-indicator/fonts/Inter-Medium.ttf";
+        ImFontAtlas fonts = ImGui.getIO().getFonts();
+        short[] glyphRanges = fonts.getGlyphRangesCyrillic();
+        addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Medium.ttf", glyphRanges);
+        boldFont = addFont(fonts, "/assets/enchantments-indicator/fonts/Inter-Bold.ttf", glyphRanges);
+    }
+
+    private static ImFont addFont(ImFontAtlas fonts, String path, short[] glyphRanges) {
         try {
             var url = ImGuiRuntime.class.getResource(path);
             if (url == null) throw new IllegalStateException("Font not found: " + path);
             try (InputStream stream = url.openStream()) {
                 byte[] fontData = stream.readAllBytes();
                 if (fontData.length <= 100) throw new IllegalStateException("Font file is too small: " + fontData.length);
-                ImGui.getIO().getFonts().addFontFromMemoryTTF(fontData, fontData.length, BASE_FONT_SIZE, ImGui.getIO().getFonts().getGlyphRangesCyrillic());
+                return fonts.addFontFromMemoryTTF(fontData, fontData.length, BASE_FONT_SIZE, glyphRanges);
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    public static ImFont boldFont() {
+        return boldFont;
     }
 
     private static void applyPendingScale() {
