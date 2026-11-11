@@ -8,15 +8,21 @@ import ru.harimasa.ei.gui.menu.component.sub.ComponentSubSettings;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
-public class ComponentContent {
-    public static void render(EIConfig config) {
-        ImGui.beginChild("content", 0, 0, false);
-        ImGui.setCursorPos(s(20), s(18));
+public final class ComponentContent {
+
+    private ComponentContent() {}
+
+    public static void render(EIConfig config, boolean compact) {
+        float availableWidth = ImGui.getContentRegionAvail().x;
+        float padding = Math.min(s(18.0f), Math.max(s(8.0f), availableWidth * 0.06f));
+        float rightGap = padding + (compact ? 0.0f : s(2.0f));
+
+        ImGui.beginChild("content", -rightGap, 0.0f, false);
+        ImGui.setCursorPos(padding, s(18.0f));
 
         if (config.page == 0) ComponentSubColors.render(config);
         else if (config.page == 1) ComponentSubInventory.render();
         else if (config.page == 2) ComponentSubSettings.render(config);
-
         ImGui.endChild();
     }
 }
