@@ -31,12 +31,10 @@ public final class ImGuiConfigScreen extends Screen {
         graphics.fill(0, 0, width, height, 0x88000000);
         ImGuiRuntime.beginFrame(width, height);
         ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);
-
         ImGuiTheme.pushTheme();
         drawMenu();
         ImGui.popStyleColor(ImGuiTheme.THEME_COLOR_COUNT);
         ImGui.popStyleVar(7);
-
         ImGuiRuntime.endFrame();
     }
 
