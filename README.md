@@ -41,7 +41,7 @@ English Russian, Ukrainian, and Belarusian, Polska
 - ~~_Partitioning into classes_~~
 - _~~Menu localization~~_
 - _~~Config~~_
-- Logo
+- _~~Logo~~_
 - _~~Custom keybind~~_
 - _~~Language selection dropdown~~_
 - CI/CD
