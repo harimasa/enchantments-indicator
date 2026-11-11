@@ -26,6 +26,7 @@ The mod was created by harimasa. But also:
 ## Versions
 
 ## Language
+Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 
 ## Roadmap
 - best gui
@@ -35,3 +36,4 @@ The mod was created by harimasa. But also:
 - Config
 - Logo
 - Custom keybind
+- Language selection dropdown
