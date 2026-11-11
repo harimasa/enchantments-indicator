@@ -44,3 +44,4 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 - Custom keybind
 - Language selection dropdown
 - CI/CD
+- Resize window by its edges
