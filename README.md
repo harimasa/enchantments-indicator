@@ -1,4 +1,4 @@
-*LOGO*
+![LOGO](src/main/resources/assets/enchantments-indicator/icon.png/)
 
 # Enchantments Indicator
 ->small descriptions
