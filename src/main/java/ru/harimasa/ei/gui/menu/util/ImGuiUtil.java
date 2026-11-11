@@ -2,12 +2,12 @@ package ru.harimasa.ei.gui.menu.util;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiStyleVar;
 import ru.harimasa.ei.gui.ImGuiRuntime;
 
 import java.util.function.Consumer;
 
 public final class ImGuiUtil {
-
     private static final float ROW_STACK_THRESHOLD = 250.0f;
     private static final float LABEL_MIN_WIDTH = 110.0f;
     private static final float LABEL_MAX_WIDTH = 150.0f;
@@ -89,5 +89,27 @@ public final class ImGuiUtil {
         ImGui.pushTextWrapPos(x + availableWidth);
         ImGui.textDisabled(text);
         ImGui.popTextWrapPos();
+    }
+
+    public static boolean modeButton(String text, boolean selected, float width) {
+        ImGui.pushStyleVar(ImGuiStyleVar.FrameBorderSize, s(1.0f));
+        if (selected) {
+            ImGui.pushStyleColor(ImGuiCol.Button, 0.17f, 0.10f, 0.23f, 1.0f);
+            ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.22f, 0.12f, 0.30f, 1.0f);
+            ImGui.pushStyleColor(ImGuiCol.Border, 0.75f, 0.30f, 1.0f, 1.0f);
+        } else {
+            ImGui.pushStyleColor(ImGuiCol.Border, 0.20f, 0.21f, 0.25f, 1.0f);
+        }
+
+        boolean clicked = ImGui.button(text, width, s(30.0f));
+
+        if (selected) {
+            ImGui.popStyleColor(3);
+        } else {
+            ImGui.popStyleColor(1);
+        }
+        ImGui.popStyleVar(1);
+
+        return clicked;
     }
 }
