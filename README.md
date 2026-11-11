@@ -43,7 +43,7 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 - Menu localization
 - Config
 - Logo
-- Custom keybind
+- _~~Custom keybind~~_
 - Language selection dropdown
 - CI/CD
 - Resize window by its edges
