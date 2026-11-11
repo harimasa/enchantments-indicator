@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import ru.harimasa.ei.mixin.accessor.BufferSourceAccessor;
 import ru.harimasa.ei.render.EIGlintShaders;
 
 @Mixin(RenderBuffers.class)

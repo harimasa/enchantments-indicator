@@ -1,4 +1,4 @@
-package ru.harimasa.ei.mixin;
+package ru.harimasa.ei.mixin.accessor;
 
 import java.util.SequencedMap;
 
