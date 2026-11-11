@@ -37,7 +37,7 @@ Right now it’s only 1.21.11; in the future, it will be 26.x
 Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 
 ## Roadmap
-- best gui
+- ~~_best gui_~~
 - Inventory visuals
 - ~~_Partitioning into classes_~~
 - Menu localization
@@ -46,4 +46,3 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 - _~~Custom keybind~~_
 - Language selection dropdown
 - CI/CD
-- Resize window by its edges
