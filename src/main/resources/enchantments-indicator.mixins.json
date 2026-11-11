@@ -4,8 +4,10 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"accessor.BufferSourceAccessor",
+		"BlockModelWrapperMixin",
 		"EquipmentLayerRendererMixin",
 		"GameRendererMixin",
+		"ItemRendererMixin",
 		"RenderBuffersMixin",
 		"RenderTypeMixin"
 	],
