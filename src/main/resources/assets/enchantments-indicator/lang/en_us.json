@@ -1,4 +1,4 @@
 {
-  "key.categories.enchantments-indicator": "Enchantments Indicator",
-  "key.enchantments-indicator.open_gui": "Open Enchantments Indicator Menu",
+  "key.category.enchantments-indicator.main": "Enchantments Indicator",
+  "key.enchantments-indicator.open_gui": "Open Enchantments Indicator Menu"
 }
