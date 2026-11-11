@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/project/enchantments-indicator",
-		"sources": "https://github.com/harimasa/enchantments-indicator"
+		"sources": "https://github.com/harimasa/enchantments-indicator",
+		"issues": "https://github.com/harimasa/enchantments-indicator/issues"
 	},
 	"license": "MIT License",
 	"icon": "assets/enchantments-indicator/icon.png",
