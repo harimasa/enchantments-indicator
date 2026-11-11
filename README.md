@@ -25,6 +25,7 @@ The mod was created by harimasa. But also:
 
 ## Versions
 
+
 ## Language
 Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 
@@ -37,3 +38,4 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 - Logo
 - Custom keybind
 - Language selection dropdown
+- CI/CD
