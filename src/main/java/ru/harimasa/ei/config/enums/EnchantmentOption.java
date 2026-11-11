@@ -1,4 +1,4 @@
-package ru.harimasa.ei.config;
+package ru.harimasa.ei.config.enums;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;

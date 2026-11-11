@@ -9,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import ru.harimasa.ei.config.ColorConfig;
 import ru.harimasa.ei.config.EIConfig;
-import ru.harimasa.ei.config.EnchantmentOption;
+import ru.harimasa.ei.config.enums.EnchantmentOption;
 
 public final class EnchantmentTint {
     private EnchantmentTint() {}

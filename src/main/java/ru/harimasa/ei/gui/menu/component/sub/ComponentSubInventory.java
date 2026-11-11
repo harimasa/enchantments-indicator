@@ -3,7 +3,7 @@ package ru.harimasa.ei.gui.menu.component.sub;
 import imgui.ImGui;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
-import ru.harimasa.ei.config.RenderMode;
+import ru.harimasa.ei.config.enums.RenderMode;
 import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;

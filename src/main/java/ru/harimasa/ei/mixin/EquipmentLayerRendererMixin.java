@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
-import ru.harimasa.ei.config.RenderMode;
+import ru.harimasa.ei.config.enums.RenderMode;
 import ru.harimasa.ei.render.EIGlintShaders;
 import ru.harimasa.ei.render.EnchantmentTint;
 

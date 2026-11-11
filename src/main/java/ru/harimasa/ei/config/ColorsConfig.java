@@ -1,5 +1,8 @@
 package ru.harimasa.ei.config;
 
+import ru.harimasa.ei.config.enums.EnchantmentOption;
+import ru.harimasa.ei.config.enums.RenderMode;
+
 public final class ColorsConfig {
     public RenderMode renderMode = RenderMode.TEXTURE;
     public int enchantment = 0;

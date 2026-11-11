@@ -1,4 +1,4 @@
-package ru.harimasa.ei.config;
+package ru.harimasa.ei.config.enums;
 
 import com.google.gson.annotations.SerializedName;
 
