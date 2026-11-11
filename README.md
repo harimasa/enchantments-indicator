@@ -24,11 +24,14 @@ The mod was created by harimasa. But also thanks:
 ## Links
 
 ## Dependencies
-fabric api
-fabricloader >= 0.20.1
-minecraft 1.21.11
-java >= 21
 
+| Mod / Runtime | Version     | Required |
+|---------------|-------------|:--------:|
+| Fabric API    | any (`*`)   |    ✅     |
+| Fabric Loader | `>= 0.20.1` |    ✅     |
+| Minecraft     | `1.21.11`   |    ✅     |
+| Java          | `>= 21`     |    ✅     |
+| Mod Menu      | `>=17.0.1`  |    ❌     |
 ## Versions
 Right now it’s only 1.21.11; in the future, it will be 26.x
 
