@@ -56,7 +56,6 @@ public final class ComponentSubSettings {
         ImGuiUtil.rowSeparator(startX);
 
         ImGui.spacing();
-        ImGuiUtil.note("Main mod settings."
-                + "Applied automatically after any changes.", startX);
+        ImGuiUtil.note("Main mod settings." + " Applied automatically after any changes.", startX);
     }
 }

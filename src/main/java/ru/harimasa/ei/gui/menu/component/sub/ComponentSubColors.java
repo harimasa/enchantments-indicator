@@ -1,6 +1,7 @@
 package ru.harimasa.ei.gui.menu.component.sub;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiColorEditFlags;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.config.EnchantmentOption;
@@ -10,6 +11,9 @@ import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentSubColors {
+    private static final float[] tempIntensity = new float[1];
+    private static boolean intensityInteracting;
+
     private ComponentSubColors() {}
 
     public static void render(EIConfig config) {
@@ -23,7 +27,7 @@ public final class ComponentSubColors {
         float availableWidth = ImGui.getContentRegionAvail().x;
         float buttonGap = s(8.0f);
         float buttonWidth = Math.max(s(40.0f), (availableWidth - buttonGap) * 0.5f);
-        if (ImGuiUtil.modeButton("Tint", config.colors.renderMode == RenderMode.TINT, buttonWidth)) {
+        if (ImGuiUtil.modeButton("Glint", config.colors.renderMode == RenderMode.TINT, buttonWidth)) {
             config.colors.renderMode = RenderMode.TINT;
             ConfigManager.markDirty();
         }
@@ -35,6 +39,7 @@ public final class ComponentSubColors {
 
         boolean tintMode = config.colors.renderMode == RenderMode.TINT;
         ImGuiUtil.rowSeparator(startX);
+
         EnchantmentOption[] options = EnchantmentOption.values();
         int selected = EnchantmentOption.clampIndex(config.colors.enchantment);
         config.colors.enchantment = selected;
@@ -50,24 +55,6 @@ public final class ComponentSubColors {
             }
             ImGui.endCombo();
         }
-
-        ImGuiUtil.rowSeparator(startX);
-
-        ImGuiUtil.formLabel("Enchantment Color", startX);
-        ImGuiUtil.formControlWidth();
-        if (tintMode) {
-            float[] rgba = config.colors.enchantmentColor.rgba();
-            if (ImGui.colorEdit4("##tint", rgba)) {
-                config.colors.enchantmentColor.setRgba(rgba);
-                ConfigManager.markDirty();
-            }
-        } else {
-            float[] rgb = config.colors.enchantmentColor.rgb();
-            if (ImGui.colorEdit3("##tint", rgb)) {
-                config.colors.enchantmentColor.setRgb(rgb);
-                ConfigManager.markDirty();
-            }
-        }
         ImGuiUtil.rowSeparator(startX);
 
         if (tintMode) {
@@ -79,7 +66,66 @@ public final class ComponentSubColors {
             ImGuiUtil.rowSeparator(startX);
         }
 
+        ImGuiUtil.formLabel("Enchantment Color", startX);
+        if (tintMode && config.colors.gradient) {
+            gradientColors(config);
+        } else {
+            ImGuiUtil.formControlWidth();
+            float[] rgb = config.colors.enchantmentColor.rgb();
+            if (ImGui.colorEdit3("##tint", rgb)) {
+                config.colors.enchantmentColor.setRgb(rgb);
+                ConfigManager.markDirty();
+            }
+        }
+        ImGuiUtil.rowSeparator(startX);
+
+        if (tintMode) {
+            ImGuiUtil.formLabel("Intensity", startX);
+            ImGuiUtil.formControlWidth();
+            if (!intensityInteracting) {
+                tempIntensity[0] = config.colors.intensity * 100.0f;
+            }
+            boolean intensityChanged = ImGui.sliderFloat("##glintIntensity", tempIntensity, 0.0f, 200.0f, "%.0f%%");
+            intensityInteracting = ImGui.isItemActive() || ImGui.isItemHovered();
+
+            if (intensityChanged) {
+                config.colors.intensity = Math.clamp(tempIntensity[0] / 100.0f, 0.0f, 2.0f);
+                ConfigManager.markDirty();
+            }
+            ImGuiUtil.rowSeparator(startX);
+        }
         ImGui.spacing();
-        ImGuiUtil.note("Allows enchantments to be displayed on the player.", startX);
+        ImGuiUtil.note(tintMode ? "Glint replaces the enchantment glint. Gradient blends From (top) into To (bottom)." + " Intensity scales the glow." : "Texture recolors the armor itself when the selected enchantment is present.", startX);
+    }
+
+    private static void gradientColors(EIConfig config) {
+        float gap = s(6.0f);
+
+        ImGui.alignTextToFramePadding();
+        ImGui.text("From");
+        ImGui.sameLine(0.0f, gap);
+
+        float[] from = config.colors.gradientFrom.rgb();
+        if (ImGui.colorEdit3("##gradientFrom", from, ImGuiColorEditFlags.NoInputs)) {
+            config.colors.gradientFrom.setRgb(from);
+            ConfigManager.markDirty();
+        }
+        ImGui.setItemTooltip("From (top)");
+
+        ImGui.sameLine(0.0f, gap);
+        ImGui.alignTextToFramePadding();
+        ImGui.text("->");
+        ImGui.sameLine(0.0f, gap);
+
+        ImGui.alignTextToFramePadding();
+        ImGui.text("To");
+        ImGui.sameLine(0.0f, gap);
+
+        float[] to = config.colors.gradientTo.rgb();
+        if (ImGui.colorEdit3("##gradientTo", to, ImGuiColorEditFlags.NoInputs)) {
+            config.colors.gradientTo.setRgb(to);
+            ConfigManager.markDirty();
+        }
+        ImGui.setItemTooltip("To (bottom)");
     }
 }

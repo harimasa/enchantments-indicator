@@ -30,7 +30,7 @@ public final class ComponentSubInventory {
         float buttonGap = s(8.0f);
         float buttonWidth = Math.max(s(40.0f), (availableWidth - buttonGap) * 0.5f);
 
-        if (ImGuiUtil.modeButton("Tint", config.inventory.renderMode == RenderMode.TINT, buttonWidth)) {
+        if (ImGuiUtil.modeButton("Glint", config.inventory.renderMode == RenderMode.TINT, buttonWidth)) {
             config.inventory.renderMode = RenderMode.TINT;
             ConfigManager.markDirty();
         }
@@ -43,7 +43,6 @@ public final class ComponentSubInventory {
         ImGuiUtil.rowSeparator(startX);
 
         ImGui.spacing();
-        ImGuiUtil.note("Placeholder for now."
-                + "Inventory highlighter in the future", startX);
+        ImGuiUtil.note("Placeholder for now." + " Inventory highlighter in the future", startX);
     }
 }
