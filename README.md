@@ -14,7 +14,7 @@
 MIT License
 
 ## Credits
-The mod was created by harimasa. But also:
+The mod was created by harimasa. But also thanks:
 - gui inspired by [NoboKik](https://github.com/NoboKik) using ImGui
 - Imgui for java [imgui-java](https://github.com/SpaiR/imgui-java)
 
@@ -40,7 +40,7 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian, Polsk
 - ~~_best gui_~~
 - _~~Inventory visuals~~_
 - ~~_Partitioning into classes_~~
-- Menu localization
+- _~~Menu localization~~_
 - _~~Config~~_
 - Logo
 - _~~Custom keybind~~_
