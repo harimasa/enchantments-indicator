@@ -38,7 +38,7 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian, Polsk
 
 ## Roadmap
 - ~~_best gui_~~
-- Inventory visuals
+- _~~Inventory visuals~~_
 - ~~_Partitioning into classes_~~
 - Menu localization
 - _~~Config~~_
