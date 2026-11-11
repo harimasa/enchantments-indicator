@@ -4,19 +4,19 @@
 
 <p align="center">
 <a href="https://github.com/harimasa/enchantments-indicator">
-  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/github.png?raw=true" alt="Github" width="43"/></a>
+  <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/github.png?raw=true" alt="Github" width="43"/></a>
 
 <a href="https://modrinth.com/mod/enchantments-indicator">
-  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/modrinth.png?raw=true" alt="Modrinth" width="45"/></a>
+  <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/modrinth.png?raw=true" alt="Modrinth" width="45"/></a>
 
   <a href="https://namemc.com/profile/harimasa.1">
-  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/namemc.png?raw=true" alt="Namemc" width="50"/></a>
+  <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/namemc.png?raw=true" alt="Namemc" width="50"/></a>
 
 <a href="https://google.com/">
-  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/curseforge.png?raw=true" alt="Curseforge" width="50"/></a>
+  <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/curseforge.png?raw=true" alt="Curseforge" width="50"/></a>
 
 <a href="https://discord.com/users/1265171544049717279">
-  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/discord.png?raw=true" alt="Discord" width="50"/></a>
+  <img src="https://github.com/harimasa/perfect-icons-trust-me/blob/main/discord.png?raw=true" alt="Discord" width="50"/></a>
 
 # Enchantments Indicator
 ->small descriptions
@@ -57,7 +57,12 @@ Created by **harimasa**. Special thanks to:
 Right now it’s only 1.21.11; in the future, it will be 26.x
 
 ## Language
-English Russian, Ukrainian, and Belarusian, Polska
+
+- <img src="src/main/resources/assets/enchantments-indicator/textures/gui/flags/us.png" height="16" valign="middle"> <b>English</b>
+- <img src="src/main/resources/assets/enchantments-indicator/textures/gui/flags/ru.png" height="16" valign="middle"> <b>Russian</b> (Русский)
+- <img src="src/main/resources/assets/enchantments-indicator/textures/gui/flags/ua.png" height="16" valign="middle"> <b>Ukrainian</b> (Українська)
+- <img src="src/main/resources/assets/enchantments-indicator/textures/gui/flags/by.png" height="16" valign="middle"> <b>Belarusian</b> (Беларуская)
+- <img src="src/main/resources/assets/enchantments-indicator/textures/gui/flags/pl.png" height="16" valign="middle"> <b>Polish</b> (Polski)
 
 ## Roadmap
 - ~~_best gui_~~
