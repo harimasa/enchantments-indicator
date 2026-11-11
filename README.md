@@ -17,6 +17,7 @@ MIT License
 The mod was created by harimasa. But also thanks:
 - gui inspired by [NoboKik](https://github.com/NoboKik) using ImGui
 - Imgui for java [imgui-java](https://github.com/SpaiR/imgui-java)
+- [Magnific](https://www.magnific.com) for flags icon
 
 ## FAQ
 
