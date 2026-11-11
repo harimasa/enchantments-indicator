@@ -42,7 +42,7 @@ public final class ImGuiConfigScreen extends Screen {
     private boolean draggingWindow;
 
     public ImGuiConfigScreen() {
-        super(Component.literal("Enchantments Indicator"));
+        super(Component.translatable("ei.menu.title"));
 
         WindowPosition savedPosition = config.general.window;
         if (savedPosition.saved) {

@@ -8,11 +8,11 @@ import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
 import net.minecraft.client.Minecraft;
 import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
+import ru.harimasa.ei.lang.Lang;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentHeader {
-    private static final String TITLE = "Enchantments Indicator";
     private static final String ICON = "✧";
 
     private ComponentHeader() {}
@@ -28,9 +28,10 @@ public final class ComponentHeader {
         float closeY = Math.round(y + (height - closeSize) * 0.5f);
 
         ImFont font = ImGui.getFont();
+        String title = Lang.get("ei.menu.title");
         int titleFontSize = Math.max(1, Math.round(ImGui.getFontSize() * 1.15f));
         ImVec2 iconSize = font.calcTextSizeA(titleFontSize, 10000.0f, 0.0f, ICON);
-        ImVec2 titleSize = font.calcTextSizeA(titleFontSize, 10000.0f, 0.0f, TITLE);
+        ImVec2 titleSize = font.calcTextSizeA(titleFontSize, 10000.0f, 0.0f, title);
 
         float iconX = x + padding;
         float iconY = y + (height - iconSize.y) * 0.5f;
@@ -39,7 +40,7 @@ public final class ComponentHeader {
         float clipRight = Math.max(iconX, closeX - s(10.0f));
         drawList.pushClipRect(iconX, y, clipRight, y + height, true);
         drawList.addText(font, titleFontSize, iconX, iconY, ImGuiTheme.accentColorU32(), ICON);
-        drawList.addText(font, titleFontSize, titleX, titleY, ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), TITLE);
+        drawList.addText(font, titleFontSize, titleX, titleY, ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), title);
         drawList.popClipRect();
 
         ImGui.setCursorScreenPos(closeX, closeY);

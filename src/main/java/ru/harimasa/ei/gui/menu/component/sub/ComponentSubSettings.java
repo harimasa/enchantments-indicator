@@ -6,6 +6,7 @@ import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.config.GeneralConfig;
 import ru.harimasa.ei.gui.ImGuiRuntime;
 import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
+import ru.harimasa.ei.lang.Lang;
 
 public final class ComponentSubSettings {
     private static final float[] tempScale = new float[1];
@@ -17,17 +18,17 @@ public final class ComponentSubSettings {
         float startX = ImGui.getCursorPosX();
 
         ImGui.setCursorPosX(startX);
-        ImGui.text("General Settings");
+        ImGui.text(Lang.get("ei.settings.title"));
         ImGui.spacing();
         ImGuiUtil.rowSeparator(startX);
 
-        ImGuiUtil.formCheckbox("Enable Mod", "##modEnabled", config.general.modEnabled, startX,
+        ImGuiUtil.formCheckbox(Lang.get("ei.settings.enable_mod"), "##modEnabled", config.general.modEnabled, startX,
                 value -> {
                     config.general.modEnabled = value;
                     ConfigManager.markDirty();
                 });
         ImGuiUtil.rowSeparator(startX);
-        ImGuiUtil.formLabel("Main Color", startX);
+        ImGuiUtil.formLabel(Lang.get("ei.settings.main_color"), startX);
         ImGuiUtil.formControlWidth();
         float[] mainColor = config.general.mainColor.rgb();
         if (ImGui.colorEdit3("##mainColor", mainColor)) {
@@ -35,7 +36,7 @@ public final class ComponentSubSettings {
             ConfigManager.markDirty();
         }
         ImGuiUtil.rowSeparator(startX);
-        ImGuiUtil.formLabel("UI Scale", startX);
+        ImGuiUtil.formLabel(Lang.get("ei.settings.ui_scale"), startX);
         ImGuiUtil.formControlWidth();
 
         if (!scaleInteracting) {
@@ -56,6 +57,6 @@ public final class ComponentSubSettings {
         ImGuiUtil.rowSeparator(startX);
 
         ImGui.spacing();
-        ImGuiUtil.note("Main mod settings." + " Applied automatically after any changes.", startX);
+        ImGuiUtil.note(Lang.get("ei.settings.note"), startX);
     }
 }

@@ -7,6 +7,7 @@ import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.config.enums.EnchantmentOption;
 import ru.harimasa.ei.config.enums.RenderMode;
 import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
+import ru.harimasa.ei.lang.Lang;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
@@ -20,19 +21,19 @@ public final class ComponentSubColors {
         float startX = ImGui.getCursorPosX();
 
         ImGui.setCursorPosX(startX);
-        ImGui.text("Render Mode");
+        ImGui.text(Lang.get("ei.colors.title"));
         ImGui.spacing();
 
         ImGui.setCursorPosX(startX);
         float availableWidth = ImGui.getContentRegionAvail().x;
         float buttonGap = s(8.0f);
         float buttonWidth = Math.max(s(40.0f), (availableWidth - buttonGap) * 0.5f);
-        if (ImGuiUtil.modeButton("Glint", config.colors.renderMode == RenderMode.GLINT, buttonWidth)) {
+        if (ImGuiUtil.modeButton(Lang.get("ei.colors.mode.glint"), config.colors.renderMode == RenderMode.GLINT, buttonWidth)) {
             config.colors.renderMode = RenderMode.GLINT;
             ConfigManager.markDirty();
         }
         ImGui.sameLine(0.0f, buttonGap);
-        if (ImGuiUtil.modeButton("Texture", config.colors.renderMode == RenderMode.TEXTURE, buttonWidth)) {
+        if (ImGuiUtil.modeButton(Lang.get("ei.colors.mode.texture"), config.colors.renderMode == RenderMode.TEXTURE, buttonWidth)) {
             config.colors.renderMode = RenderMode.TEXTURE;
             ConfigManager.markDirty();
         }
@@ -44,7 +45,7 @@ public final class ComponentSubColors {
         int selected = EnchantmentOption.clampIndex(config.colors.enchantment);
         config.colors.enchantment = selected;
 
-        ImGuiUtil.formLabel("Enchantment", startX);
+        ImGuiUtil.formLabel(Lang.get("ei.colors.enchantment"), startX);
         ImGuiUtil.formControlWidth();
         if (ImGui.beginCombo("##enchantments", options[selected].label())) {
             for (int i = 0; i < options.length; i++) {
@@ -58,7 +59,7 @@ public final class ComponentSubColors {
         ImGuiUtil.rowSeparator(startX);
 
         if (glintMode) {
-            ImGuiUtil.formCheckbox("Gradient", "##gradient", config.colors.gradient, startX,
+            ImGuiUtil.formCheckbox(Lang.get("ei.colors.gradient"), "##gradient", config.colors.gradient, startX,
                     value -> {
                         config.colors.gradient = value;
                         ConfigManager.markDirty();
@@ -66,7 +67,7 @@ public final class ComponentSubColors {
             ImGuiUtil.rowSeparator(startX);
         }
 
-        ImGuiUtil.formLabel("Enchantment Color", startX);
+        ImGuiUtil.formLabel(Lang.get("ei.colors.color"), startX);
         if (glintMode && config.colors.gradient) {
             gradientColors(config);
         } else {
@@ -80,7 +81,7 @@ public final class ComponentSubColors {
         ImGuiUtil.rowSeparator(startX);
 
         if (glintMode) {
-            ImGuiUtil.formLabel("Intensity", startX);
+            ImGuiUtil.formLabel(Lang.get("ei.colors.intensity"), startX);
             ImGuiUtil.formControlWidth();
             if (!intensityInteracting) {
                 tempIntensity[0] = config.colors.intensity * 100.0f;
@@ -95,14 +96,14 @@ public final class ComponentSubColors {
             ImGuiUtil.rowSeparator(startX);
         }
         ImGui.spacing();
-        ImGuiUtil.note(glintMode ? "Glint replaces the enchantment glint. Gradient blends From (top) into To (bottom)." + " Intensity scales the glow." : "Texture recolors the armor itself when the selected enchantment is present.", startX);
+        ImGuiUtil.note(Lang.get(glintMode ? "ei.colors.note.glint" : "ei.colors.note.texture"), startX);
     }
 
     private static void gradientColors(EIConfig config) {
         float gap = s(6.0f);
 
         ImGui.alignTextToFramePadding();
-        ImGui.text("From");
+        ImGui.text(Lang.get("ei.colors.from"));
         ImGui.sameLine(0.0f, gap);
 
         float[] from = config.colors.gradientFrom.rgb();
@@ -110,7 +111,7 @@ public final class ComponentSubColors {
             config.colors.gradientFrom.setRgb(from);
             ConfigManager.markDirty();
         }
-        ImGui.setItemTooltip("From (top)");
+        ImGui.setItemTooltip(Lang.get("ei.colors.from_tooltip"));
 
         ImGui.sameLine(0.0f, gap);
         ImGui.alignTextToFramePadding();
@@ -118,7 +119,7 @@ public final class ComponentSubColors {
         ImGui.sameLine(0.0f, gap);
 
         ImGui.alignTextToFramePadding();
-        ImGui.text("To");
+        ImGui.text(Lang.get("ei.colors.to"));
         ImGui.sameLine(0.0f, gap);
 
         float[] to = config.colors.gradientTo.rgb();
@@ -126,6 +127,6 @@ public final class ComponentSubColors {
             config.colors.gradientTo.setRgb(to);
             ConfigManager.markDirty();
         }
-        ImGui.setItemTooltip("To (bottom)");
+        ImGui.setItemTooltip(Lang.get("ei.colors.to_tooltip"));
     }
 }

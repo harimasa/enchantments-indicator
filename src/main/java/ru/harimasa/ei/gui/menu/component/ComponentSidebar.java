@@ -9,11 +9,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.config.EIConfig;
 import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
+import ru.harimasa.ei.lang.Lang;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentSidebar {
-    private static final String[] PAGES = {"Colors", "Inventory"};
+    private static final String[] PAGE_KEYS = {"ei.page.colors", "ei.page.inventory"};
     private static final int SETTINGS_PAGE = 2;
 
     private ComponentSidebar() {}
@@ -27,12 +28,12 @@ public final class ComponentSidebar {
         float gap = s(14.0f);
 
         ImGui.setCursorPosY(s(14.0f));
-        for (int i = 0; i < PAGES.length; i++) {
+        for (int i = 0; i < PAGE_KEYS.length; i++) {
             ImGui.setCursorPosX(padding);
-            if (navButton(PAGES[i], config.page == i, buttonWidth, buttonHeight, false)) {
+            if (navButton(Lang.get(PAGE_KEYS[i]), config.page == i, buttonWidth, buttonHeight, false)) {
                 config.page = i;
             }
-            if (i < PAGES.length - 1) {
+            if (i < PAGE_KEYS.length - 1) {
                 ImGui.dummy(0.0f, gap);
             }
         }
@@ -55,13 +56,13 @@ public final class ComponentSidebar {
         float gap = s(6.0f);
         float settingsSize = height;
         float tabsWidth = Math.max(0.0f, width - settingsSize - gap);
-        float buttonWidth = Math.max(s(1.0f), (tabsWidth - gap * (PAGES.length - 1)) / PAGES.length);
+        float buttonWidth = Math.max(s(1.0f), (tabsWidth - gap * (PAGE_KEYS.length - 1)) / PAGE_KEYS.length);
         float x = ImGui.getCursorScreenPosX();
         float y = ImGui.getCursorScreenPosY();
         float cursorX = x;
-        for (int i = 0; i < PAGES.length; i++) {
+        for (int i = 0; i < PAGE_KEYS.length; i++) {
             ImGui.setCursorScreenPos(cursorX, y);
-            if (navButton(PAGES[i], config.page == i, buttonWidth, height, true)) {
+            if (navButton(Lang.get(PAGE_KEYS[i]), config.page == i, buttonWidth, height, true)) {
                 config.page = i;
             }
             cursorX += buttonWidth + gap;
@@ -147,9 +148,9 @@ public final class ComponentSidebar {
             drawList.addRect(x, y, x + size, y + size, ImGuiTheme.accentColorU32(), s(6.0f), 0, Math.max(1.0f, s(1.0f)));
         }
 
-        Identifier gearTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");
+        Identifier settingsTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.jpg");
         try {
-            var texture = Minecraft.getInstance().getTextureManager().getTexture(gearTexture);
+            var texture = Minecraft.getInstance().getTextureManager().getTexture(settingsTexture);
             int texId = ((GlTexture) texture.getTexture()).glId();
             float padding = s(7.0f);
             float imageSize = Math.max(1.0f, size - padding * 2.0f);

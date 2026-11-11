@@ -1,4 +1,52 @@
 {
   "key.category.enchantments-indicator.main": "Enchantments Indicator",
-  "key.enchantments-indicator.open_gui": "Open Enchantments Indicator Menu"
+  "key.enchantments-indicator.open_gui": "Open Enchantments Indicator Menu",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Colors",
+  "ei.page.inventory": "Inventory",
+
+  "ei.settings.title": "General Settings",
+  "ei.settings.enable_mod": "Enable Mod",
+  "ei.settings.main_color": "Main Color",
+  "ei.settings.ui_scale": "UI Scale",
+  "ei.settings.note": "Main mod settings. Applied automatically after any changes.",
+
+  "ei.colors.title": "Render Mode",
+  "ei.colors.mode.glint": "Glint",
+  "ei.colors.mode.texture": "Texture",
+  "ei.colors.enchantment": "Enchantment",
+  "ei.colors.gradient": "Gradient",
+  "ei.colors.color": "Enchantment Color",
+  "ei.colors.intensity": "Intensity",
+  "ei.colors.from": "From",
+  "ei.colors.to": "To",
+  "ei.colors.from_tooltip": "From (top)",
+  "ei.colors.to_tooltip": "To (bottom)",
+  "ei.colors.note.glint": "Glint replaces the enchantment glint. Gradient blends From (top) into To (bottom). Intensity scales the glow.",
+  "ei.colors.note.texture": "Texture recolors the armor itself when the selected enchantment is present.",
+
+  "ei.inventory.title": "Inventory Visuals",
+  "ei.inventory.enable": "Enable",
+  "ei.inventory.render_mode": "Render Mode",
+  "ei.inventory.note.glint": "Glint recolors the enchantment glint on items in the inventory and in hands.",
+  "ei.inventory.note.texture": "Texture recolors the item texture in the inventory and in hands.",
+
+  "ei.enchantment.protection": "Protection",
+  "ei.enchantment.fire_protection": "Fire Protection",
+  "ei.enchantment.blast_protection": "Blast Protection",
+  "ei.enchantment.projectile_protection": "Projectile Protection",
+  "ei.enchantment.unbreaking": "Unbreaking",
+  "ei.enchantment.mending": "Mending",
+  "ei.enchantment.thorns": "Thorns",
+  "ei.enchantment.binding_curse": "Curse of Binding",
+  "ei.enchantment.vanishing_curse": "Curse of Vanishing",
+  "ei.enchantment.respiration": "Respiration",
+  "ei.enchantment.aqua_affinity": "Aqua Affinity",
+  "ei.enchantment.swift_sneak": "Swift Sneak",
+  "ei.enchantment.feather_falling": "Feather Falling",
+  "ei.enchantment.depth_strider": "Depth Strider",
+  "ei.enchantment.frost_walker": "Frost Walker",
+  "ei.enchantment.soul_speed": "Soul Speed"
 }

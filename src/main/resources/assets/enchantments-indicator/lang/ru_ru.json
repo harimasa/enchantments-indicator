@@ -1,4 +1,52 @@
 {
   "key.category.enchantments-indicator.main": "Enchantments Indicator",
-  "key.enchantments-indicator.open_gui": "Открыть меню Enchantments Indicator"
+  "key.enchantments-indicator.open_gui": "Открыть меню Enchantments Indicator",
+
+  "ei.menu.title": "Enchantments Indicator",
+
+  "ei.page.colors": "Цвета",
+  "ei.page.inventory": "Инвентарь",
+
+  "ei.settings.title": "Общие настройки",
+  "ei.settings.enable_mod": "Включить мод",
+  "ei.settings.main_color": "Основной цвет",
+  "ei.settings.ui_scale": "Масштаб интерфейса",
+  "ei.settings.note": "Основные настройки мода. Применяются автоматически после изменений.",
+
+  "ei.colors.title": "Режим отображения",
+  "ei.colors.mode.glint": "Блеск",
+  "ei.colors.mode.texture": "Текстура",
+  "ei.colors.enchantment": "Зачарование",
+  "ei.colors.gradient": "Градиент",
+  "ei.colors.color": "Цвет зачарования",
+  "ei.colors.intensity": "Интенсивность",
+  "ei.colors.from": "От",
+  "ei.colors.to": "До",
+  "ei.colors.from_tooltip": "От (верх)",
+  "ei.colors.to_tooltip": "До (низ)",
+  "ei.colors.note.glint": "Блеск заменяет блеск зачарования. Градиент смешивает цвета «От» (сверху) и «До» (снизу). Интенсивность регулирует свечение.",
+  "ei.colors.note.texture": "Текстура перекрашивает саму броню при наличии выбранного зачарования.",
+
+  "ei.inventory.title": "Визуализация инвентаря",
+  "ei.inventory.enable": "Включить",
+  "ei.inventory.render_mode": "Режим отображения",
+  "ei.inventory.note.glint": "Блеск перекрашивает блеск зачарования на предметах в инвентаре и в руках.",
+  "ei.inventory.note.texture": "Текстура перекрашивает текстуру предмета в инвентаре и в руках.",
+
+  "ei.enchantment.protection": "Защита",
+  "ei.enchantment.fire_protection": "Огнеупорность",
+  "ei.enchantment.blast_protection": "Взрывоустойчивость",
+  "ei.enchantment.projectile_protection": "Защита от снарядов",
+  "ei.enchantment.unbreaking": "Прочность",
+  "ei.enchantment.mending": "Починка",
+  "ei.enchantment.thorns": "Шипы",
+  "ei.enchantment.binding_curse": "Проклятие привязки",
+  "ei.enchantment.vanishing_curse": "Проклятие исчезновения",
+  "ei.enchantment.respiration": "Подводное дыхание",
+  "ei.enchantment.aqua_affinity": "Подводник",
+  "ei.enchantment.swift_sneak": "Быстрая крадучесть",
+  "ei.enchantment.feather_falling": "Невесомость",
+  "ei.enchantment.depth_strider": "Скороход",
+  "ei.enchantment.frost_walker": "Ледоход",
+  "ei.enchantment.soul_speed": "Скорость души"
 }
