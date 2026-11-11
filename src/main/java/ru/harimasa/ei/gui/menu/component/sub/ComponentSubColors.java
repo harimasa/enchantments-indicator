@@ -1,22 +1,15 @@
 package ru.harimasa.ei.gui.menu.component.sub;
 
 import imgui.ImGui;
-import imgui.flag.ImGuiCol;
-import imgui.flag.ImGuiStyleVar;
+import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.config.EIConfig;
+import ru.harimasa.ei.config.EnchantmentOption;
+import ru.harimasa.ei.config.RenderMode;
 import ru.harimasa.ei.gui.menu.util.ImGuiUtil;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentSubColors {
-
-    private static final String[] ENCHANTMENTS = {
-            "Protection", "Fire Protection", "Blast Protection", "Projectile Protection",
-            "Unbreaking", "Mending", "Thorns", "Curse of Binding", "Curse of Vanishing",
-            "Respiration", "Aqua Affinity", "Swift Sneak", "Feather Falling", "Depth Strider",
-            "Frost Walker", "Soul Speed"
-    };
-
     private ComponentSubColors() {}
 
     public static void render(EIConfig config) {
@@ -30,68 +23,63 @@ public final class ComponentSubColors {
         float availableWidth = ImGui.getContentRegionAvail().x;
         float buttonGap = s(8.0f);
         float buttonWidth = Math.max(s(40.0f), (availableWidth - buttonGap) * 0.5f);
-
-        ImGui.setCursorPosX(startX);
-        if (modeButton("Tint", !config.textureMode, buttonWidth)) {
-            config.textureMode = false;
+        if (ImGuiUtil.modeButton("Tint", config.colors.renderMode == RenderMode.TINT, buttonWidth)) {
+            config.colors.renderMode = RenderMode.TINT;
+            ConfigManager.markDirty();
         }
         ImGui.sameLine(0.0f, buttonGap);
-        if (modeButton("Texture", config.textureMode, buttonWidth)) {
-            config.textureMode = true;
+        if (ImGuiUtil.modeButton("Texture", config.colors.renderMode == RenderMode.TEXTURE, buttonWidth)) {
+            config.colors.renderMode = RenderMode.TEXTURE;
+            ConfigManager.markDirty();
         }
+
+        boolean tintMode = config.colors.renderMode == RenderMode.TINT;
         ImGuiUtil.rowSeparator(startX);
+        EnchantmentOption[] options = EnchantmentOption.values();
+        int selected = EnchantmentOption.clampIndex(config.colors.enchantment);
+        config.colors.enchantment = selected;
 
         ImGuiUtil.formLabel("Enchantment", startX);
         ImGuiUtil.formControlWidth();
-        if (ImGui.beginCombo("##enchantments", ENCHANTMENTS[config.enchantment])) {
-            for (int i = 0; i < ENCHANTMENTS.length; i++) {
-                if (ImGui.selectable(ENCHANTMENTS[i], config.enchantment == i)) {
-                    config.enchantment = i;
+        if (ImGui.beginCombo("##enchantments", options[selected].label())) {
+            for (int i = 0; i < options.length; i++) {
+                if (ImGui.selectable(options[i].label(), selected == i)) {
+                    config.colors.enchantment = i;
+                    ConfigManager.markDirty();
                 }
             }
             ImGui.endCombo();
         }
+
         ImGuiUtil.rowSeparator(startX);
 
         ImGuiUtil.formLabel("Enchantment Color", startX);
         ImGuiUtil.formControlWidth();
-        if (config.textureMode) {
-            float[] rgbTint = {config.tint[0], config.tint[1], config.tint[2]};
-            if (ImGui.colorEdit3("##tint", rgbTint)) {
-                config.tint[0] = rgbTint[0];
-                config.tint[1] = rgbTint[1];
-                config.tint[2] = rgbTint[2];
+        if (tintMode) {
+            float[] rgba = config.colors.enchantmentColor.rgba();
+            if (ImGui.colorEdit4("##tint", rgba)) {
+                config.colors.enchantmentColor.setRgba(rgba);
+                ConfigManager.markDirty();
             }
         } else {
-            ImGui.colorEdit4("##tint", config.tint);
+            float[] rgb = config.colors.enchantmentColor.rgb();
+            if (ImGui.colorEdit3("##tint", rgb)) {
+                config.colors.enchantmentColor.setRgb(rgb);
+                ConfigManager.markDirty();
+            }
         }
         ImGuiUtil.rowSeparator(startX);
 
-        if (!config.textureMode) {
-            ImGuiUtil.formCheckbox("Gradient", "##gradient", config.gradient.get(), startX, config.gradient::set);
+        if (tintMode) {
+            ImGuiUtil.formCheckbox("Gradient", "##gradient", config.colors.gradient, startX,
+                    value -> {
+                        config.colors.gradient = value;
+                        ConfigManager.markDirty();
+                    });
             ImGuiUtil.rowSeparator(startX);
         }
+
         ImGui.spacing();
-        ImGuiUtil.note("Changes are applied immediately while playing.", startX);
-    }
-
-    private static boolean modeButton(String text, boolean selected, float width) {
-        ImGui.pushStyleVar(ImGuiStyleVar.FrameBorderSize, s(1.0f));
-        if (selected) {
-            ImGui.pushStyleColor(ImGuiCol.Button, 0.17f, 0.10f, 0.23f, 1.0f);
-            ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.22f, 0.12f, 0.30f, 1.0f);
-            ImGui.pushStyleColor(ImGuiCol.Border, 0.75f, 0.30f, 1.0f, 1.0f);
-        } else {
-            ImGui.pushStyleColor(ImGuiCol.Border, 0.20f, 0.21f, 0.25f, 1.0f);
-        }
-        boolean clicked = ImGui.button(text, width, s(30.0f));
-
-        if (selected) {
-            ImGui.popStyleColor(3);
-        } else {
-            ImGui.popStyleColor(1);
-        }
-        ImGui.popStyleVar(1);
-        return clicked;
+        ImGuiUtil.note("Allows enchantments to be displayed on the player.", startX);
     }
 }
