@@ -1,15 +1,19 @@
 package ru.harimasa.ei.config;
 
-import imgui.type.ImBoolean;
+public final class EIConfig {
 
-// Седня сделать конфиг
-public class EIConfig {
-    public int page = 0;
-    public boolean textureMode = true;
-    public final ImBoolean gradient = new ImBoolean(false);
-    public boolean modEnabled = true;
-    public final float[] mainColor = { 0.75f, 0.33f, 1.0f };
-    public float uiScalePercent = 100.0f;
-    public int enchantment = 0;
-    public final float[] tint = { 0.67f, 0.33f, 1.0f, 1.0f };
+    public GeneralConfig general = new GeneralConfig();
+    public ColorsConfig colors = new ColorsConfig();
+    public InventoryConfig inventory = new InventoryConfig();
+    public transient int page = 0;
+
+    public void validate() {
+        if (general == null) general = new GeneralConfig();
+        if (colors == null) colors = new ColorsConfig();
+        if (inventory == null) inventory = new InventoryConfig();
+
+        general.validate();
+        colors.validate();
+        inventory.validate();
+    }
 }
