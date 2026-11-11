@@ -26,7 +26,7 @@ public abstract class RenderBuffersMixin {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void registerGlintBuffer(int useless, CallbackInfo ci) {
-		SequencedMap<RenderType, ByteBufferBuilder> fixed = ((BufferSourceAccessor) this.bufferSource).ei$fixedBuffers();
+		SequencedMap<RenderType, ByteBufferBuilder> fixed = ((BufferSourceAccessor) this.bufferSource).fixedBuffers();
 		RenderType type = EIGlintShaders.ARMOR_GLINT;
 		fixed.putIfAbsent(type, new ByteBufferBuilder(type.bufferSize()));
 	}

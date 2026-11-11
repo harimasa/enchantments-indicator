@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(MultiBufferSource.BufferSource.class)
 public interface BufferSourceAccessor {
-
 	@Accessor("fixedBuffers")
-	SequencedMap<RenderType, ByteBufferBuilder> ei$fixedBuffers();
+	SequencedMap<RenderType, ByteBufferBuilder> fixedBuffers();
 }
