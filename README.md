@@ -23,6 +23,8 @@ The mod was created by harimasa. But also:
 ## Links
 
 ## Dependencies
+fabric api
+minecraft 1.21.11
 
 ## Versions
 Right now it’s only 1.21.11; in the future, it will be 26.x
