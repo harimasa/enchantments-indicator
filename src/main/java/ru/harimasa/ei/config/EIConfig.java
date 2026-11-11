@@ -2,6 +2,7 @@ package ru.harimasa.ei.config;
 
 import imgui.type.ImBoolean;
 
+// Седня сделать конфиг
 public class EIConfig {
     public int page = 0;
     public boolean textureMode = true;

@@ -2,6 +2,7 @@ package ru.harimasa.ei.gui.menu.component.sub;
 
 import imgui.ImGui;
 
+// Сначало основное потом эту заглушку доделать
 public final class ComponentSubInventory {
 
     private ComponentSubInventory() {}
