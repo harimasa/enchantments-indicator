@@ -11,11 +11,19 @@
 ## License
 MIT License
 
-## Credits
-The mod was created by harimasa. But also thanks:
-- gui inspired by [NoboKik](https://github.com/NoboKik) using ImGui
-- Imgui for java [imgui-java](https://github.com/SpaiR/imgui-java)
-- [Magnific](https://www.magnific.com) for flags icon
+<details>
+<summary>Credits</summary>
+
+Created by **harimasa**. Special thanks to:
+
+- GUI inspired by [NoboKik](https://github.com/NoboKik) using ImGui.
+- [imgui-java](https://github.com/SpaiR/imgui-java) for providing ImGui bindings for Java.
+- [Magnific](https://www.magnific.com) for the flag icons.
+- Art is inspired by [ImPiglet](https://modrinth.com/user/ImPiglet).
+- Moral supps [drimbik](https://github.com/drimbik).
+- [Github](https://github.com/harimasa/perfect-icons-trust-me) behind the host of beautiful icons
+
+</details>
 
 ## FAQ
 
