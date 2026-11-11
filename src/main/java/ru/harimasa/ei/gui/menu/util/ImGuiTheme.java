@@ -7,7 +7,11 @@ import imgui.flag.ImGuiStyleVar;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public class ImGuiTheme {
-    public static final int THEME_COLOR_COUNT = 23;
+    public static final int THEME_COLOR_COUNT = 27;
+
+    public static final float WINDOW_BG_R = 0.045f;
+    public static final float WINDOW_BG_G = 0.047f;
+    public static final float WINDOW_BG_B = 0.058f;
 
     public static void pushTheme() {
         ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, s(12));
@@ -20,8 +24,9 @@ public class ImGuiTheme {
 
         ImGui.pushStyleColor(ImGuiCol.Text, 0.91f, 0.91f, 0.95f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.TextDisabled, 0.53f, 0.54f, 0.61f, 1.0f);
-        ImGui.pushStyleColor(ImGuiCol.WindowBg, 0.045f, 0.047f, 0.058f, 1.0f);
-        ImGui.pushStyleColor(ImGuiCol.ChildBg, 0.045f, 0.047f, 0.058f, 1.0f);
+
+        ImGui.pushStyleColor(ImGuiCol.WindowBg, WINDOW_BG_R, WINDOW_BG_G, WINDOW_BG_B, 0.0f);
+        ImGui.pushStyleColor(ImGuiCol.ChildBg, WINDOW_BG_R, WINDOW_BG_G, WINDOW_BG_B, 0.0f);
         ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.075f, 0.077f, 0.095f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.Border, 0.20f, 0.21f, 0.25f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.FrameBg, 0.085f, 0.09f, 0.115f, 1.0f);
@@ -41,5 +46,14 @@ public class ImGuiTheme {
         ImGui.pushStyleColor(ImGuiCol.Separator, 0.19f, 0.20f, 0.24f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.SeparatorHovered, 0.65f, 0.30f, 0.90f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.SeparatorActive, 0.75f, 0.33f, 1.0f, 1.0f);
+
+        ImGui.pushStyleColor(ImGuiCol.ScrollbarBg, 0.0f, 0.0f, 0.0f, 0.0f);
+        ImGui.pushStyleColor(ImGuiCol.ScrollbarGrab, 0.45f, 0.25f, 0.60f, 0.90f);
+        ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabHovered, 0.65f, 0.32f, 0.85f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabActive, 0.78f, 0.38f, 1.0f, 1.0f);
+    }
+
+    public static int windowBgColor() {
+        return ImGui.getColorU32(WINDOW_BG_R, WINDOW_BG_G, WINDOW_BG_B, 1.0f);
     }
 }
