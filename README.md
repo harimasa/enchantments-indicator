@@ -53,8 +53,14 @@ Created by **harimasa**. Special thanks to:
 | Java          | `>= 21`     |    ✅     |
 | Mod Menu      | `>=17.0.1`  |    ❌     |
 
-## Versions
-Right now it’s only 1.21.11; in the future, it will be 26.x
+## Supported Versions
+
+| Version | Status |
+| :--- | :---: |
+| `1.21.11` | ✅ |
+| `26.1` | ❌ |
+| `26.2` | ❌ |
+| `26.3` | ❌ |
 
 ## Language
 
@@ -74,4 +80,5 @@ Right now it’s only 1.21.11; in the future, it will be 26.x
 - _~~Custom keybind~~_
 - _~~Language selection dropdown~~_
 - CI/CD
+- liquid glass
 - _~~modmenu open menu~~_
