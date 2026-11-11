@@ -1,5 +1,6 @@
 package ru.harimasa.ei.gui.menu.component;
 
+import com.mojang.blaze3d.opengl.GlTexture;
 import imgui.ImDrawList;
 import imgui.ImFont;
 import imgui.ImGui;
@@ -7,13 +8,13 @@ import imgui.ImVec2;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
 import net.minecraft.client.Minecraft;
-import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
+import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.lang.Lang;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentHeader {
-    private static final String ICON = "✧";
+    private static final Identifier LOGO_TEXTURE = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/logo.png");
 
     private ComponentHeader() {}
 
@@ -30,16 +31,15 @@ public final class ComponentHeader {
         ImFont font = ImGui.getFont();
         String title = Lang.get("ei.menu.title");
         int titleFontSize = Math.max(1, Math.round(ImGui.getFontSize() * 1.15f));
-        ImVec2 iconSize = font.calcTextSizeA(titleFontSize, 10000.0f, 0.0f, ICON);
         ImVec2 titleSize = font.calcTextSizeA(titleFontSize, 10000.0f, 0.0f, title);
-
+        float iconSize = Math.max(s(32.0f), titleSize.y * 2.2f);
         float iconX = x + padding;
-        float iconY = y + (height - iconSize.y) * 0.5f;
-        float titleX = iconX + iconSize.x + s(8.0f);
+        float iconY = y + (height - iconSize) * 0.5f;
+        float titleX = iconX + iconSize + s(8.0f);
         float titleY = y + (height - titleSize.y) * 0.5f;
         float clipRight = Math.max(iconX, closeX - s(10.0f));
         drawList.pushClipRect(iconX, y, clipRight, y + height, true);
-        drawList.addText(font, titleFontSize, iconX, iconY, ImGuiTheme.accentColorU32(), ICON);
+        drawLogo(drawList, iconX, iconY, iconSize);
         drawList.addText(font, titleFontSize, titleX, titleY, ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), title);
         drawList.popClipRect();
 
@@ -70,5 +70,11 @@ public final class ComponentHeader {
 
         if (closeClicked) Minecraft.getInstance().setScreen(null);
         ImGui.setCursorScreenPos(x, y + height);
+    }
+
+    private static void drawLogo(ImDrawList drawList, float x, float y, float size) {
+        var texture = Minecraft.getInstance().getTextureManager().getTexture(LOGO_TEXTURE);
+        int texId = ((GlTexture) texture.getTexture()).glId();
+        drawList.addImage(texId, x, y, x + size, y + size);
     }
 }
