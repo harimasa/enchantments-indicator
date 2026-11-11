@@ -11,95 +11,156 @@ import ru.harimasa.ei.config.EIConfig;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
-public class ComponentSidebar {
-    public static void render(EIConfig config) {
-        ImGui.beginChild("sidebar", s(152), 0, true);
-        float padding = s(12);
-        float btnWidth = s(152) - padding * 2;
-        float btnHeight = s(38);
+public final class ComponentSidebar {
 
-        ImGui.setCursorPosY(s(20));
-        String[] names = {"Colors", "Inventory"};
-        for (int i = 0; i < names.length; i++) {
-            boolean selected = config.page == i;
+    private static final String[] PAGES = {"Colors", "Inventory"};
+    private static final int SETTINGS_PAGE = 2;
+
+    private ComponentSidebar() {}
+
+    public static void renderVertical(EIConfig config, float width) {
+        ImGui.beginChild("sidebar", width, 0.0f, false);
+
+        float padding = s(10.0f);
+        float buttonWidth = Math.max(s(40.0f), width - padding * 2.0f);
+        float buttonHeight = s(44.0f);
+        float gap = s(14.0f);
+
+        ImGui.setCursorPosY(s(14.0f));
+        for (int i = 0; i < PAGES.length; i++) {
             ImGui.setCursorPosX(padding);
-            if (customSidebarButton(names[i], selected, btnWidth, btnHeight)) {
+            if (navButton(PAGES[i], config.page == i, buttonWidth, buttonHeight, false)) {
                 config.page = i;
             }
-            ImGui.spacing();
+            if (i < PAGES.length - 1) {
+                ImGui.dummy(0.0f, gap);
+            }
         }
 
-        float bottomY = ImGui.getWindowHeight() - btnHeight - padding;
-        ImGui.setCursorPos(padding, bottomY);
-        if (customSettingsButton(btnHeight, config.page == 2)) {
-            config.page = 2;
+        float settingsY = ImGui.getWindowHeight() - buttonHeight - padding;
+        float minSettingsY = ImGui.getCursorPosY() + gap;
+        if (settingsY < minSettingsY) {
+            settingsY = minSettingsY;
+        }
+
+        ImGui.setCursorPos(padding, settingsY);
+        if (settingsButton(buttonHeight, config.page == SETTINGS_PAGE)) {
+            config.page = SETTINGS_PAGE;
         }
         ImGui.endChild();
     }
 
-    private static boolean customSettingsButton(float size, boolean selected) {
+    public static void renderHorizontal(EIConfig config, float width) {
+        float height = s(34.0f);
+        float gap = s(6.0f);
+        float settingsSize = height;
+        float tabsWidth = Math.max(0.0f, width - settingsSize - gap);
+        float buttonWidth = Math.max(s(1.0f), (tabsWidth - gap * (PAGES.length - 1)) / PAGES.length);
+        float x = ImGui.getCursorScreenPosX();
+        float y = ImGui.getCursorScreenPosY();
+        float cursorX = x;
+        for (int i = 0; i < PAGES.length; i++) {
+            ImGui.setCursorScreenPos(cursorX, y);
+            if (navButton(PAGES[i], config.page == i, buttonWidth, height, true)) {
+                config.page = i;
+            }
+            cursorX += buttonWidth + gap;
+        }
+        ImGui.setCursorScreenPos(x + Math.max(0.0f, width - settingsSize), y);
+        if (settingsButton(settingsSize, config.page == SETTINGS_PAGE)) {
+            config.page = SETTINGS_PAGE;
+        }
+        ImGui.setCursorScreenPos(x, y + height);
+    }
+
+    private static boolean navButton(String label, boolean selected, float width, float height, boolean horizontal) {
         ImDrawList drawList = ImGui.getWindowDrawList();
         float x = ImGui.getCursorScreenPosX();
         float y = ImGui.getCursorScreenPosY();
+
+        ImGui.invisibleButton("##nav_" + label, width, height);
+        boolean clicked = ImGui.isItemClicked();
+        boolean hovered = ImGui.isItemHovered();
+
+        int background = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) : hovered ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) : ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
+        drawList.addRectFilled(x, y, x + width, y + height, background, s(6.0f));
+
+        int accent = ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f);
+        if (selected) {
+            if (horizontal) {
+                drawList.addRectFilled(x, y + height - s(2.0f), x + width, y + height, accent, s(2.0f), ImDrawFlags.RoundCornersBottom);
+            } else {
+                drawList.addRectFilled(x, y, x + s(4.0f), y + height, accent, s(6.0f), ImDrawFlags.RoundCornersLeft);
+            }
+        }
+        ImVec2 textSize = ImGui.calcTextSize(label);
+        int textColor = selected ? ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f) : ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f);
+        float iconRadius = s(5.0f);
+        float iconDiameter = iconRadius * 2.0f;
+        float iconGap = s(12.0f);
+        float contentWidth = iconDiameter + iconGap + textSize.x;
+        boolean showIcon = !horizontal && contentWidth <= width - s(24.0f);
+
+        drawList.pushClipRect(x + s(2.0f), y, x + Math.max(s(2.0f), width - s(2.0f)), y + height, true);
+        if (showIcon) {
+            float contentStartX = x + s(18.0f);
+            float iconCenterX = contentStartX + iconRadius;
+            float iconCenterY = y + height * 0.5f;
+            float textX = contentStartX + iconDiameter + iconGap;
+            float textY = y + (height - textSize.y) * 0.5f;
+
+            drawIcon(drawList, selected, iconCenterX, iconCenterY, iconRadius);
+            drawList.addText(textX, textY, textColor, label);
+        } else {
+            float textX = x + (width - textSize.x) * 0.5f;
+            float textY = y + (height - textSize.y) * 0.5f;
+            drawList.addText(textX, textY, textColor, label);
+        }
+        drawList.popClipRect();
+        return clicked;
+    }
+
+    private static void drawIcon(ImDrawList drawList, boolean selected, float centerX, float centerY, float radius) {
+        int accent = ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f);
+        if (selected) {
+            drawList.addCircle(centerX, centerY, radius, accent, 16, s(1.5f));
+            drawList.addCircleFilled(centerX, centerY, radius * 0.5f, accent, 16);
+        } else {
+            int muted = ImGui.getColorU32(0.45f, 0.45f, 0.5f, 1.0f);
+            drawList.addRect(centerX - radius, centerY - radius, centerX + radius, centerY + radius, muted, s(2.0f), 0, s(1.5f));
+            drawList.addRectFilled(centerX - radius / 2.0f, centerY - radius / 2.0f, centerX + radius / 2.0f, centerY + radius / 2.0f, muted, s(1.0f));
+        }
+    }
+
+    private static boolean settingsButton(float size, boolean selected) {
+        ImDrawList drawList = ImGui.getWindowDrawList();
+        float x = ImGui.getCursorScreenPosX();
+        float y = ImGui.getCursorScreenPosY();
+
         ImGui.invisibleButton("##settings", size, size);
         boolean clicked = ImGui.isItemClicked();
         boolean hovered = ImGui.isItemHovered();
 
-        int bgCol = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) :
-                hovered  ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) :
-                        ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
-        drawList.addRectFilled(x, y, x + size, y + size, bgCol, s(6));
+        int background = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) : hovered ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) : ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
+        drawList.addRectFilled(x, y, x + size, y + size, background, s(6.0f));
+        if (selected) {
+            drawList.addRect(x, y, x + size, y + size, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), s(6.0f), 0, Math.max(1.0f, s(1.0f)));
+        }
 
         Identifier gearTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");
         try {
             var texture = Minecraft.getInstance().getTextureManager().getTexture(gearTexture);
             int texId = ((GlTexture) texture.getTexture()).glId();
-            float padding = s(8.0f);
-            float imgSize = size - (padding * 2);
-            drawList.addImage(texId, x + padding, y + padding, x + padding + imgSize, y + padding + imgSize);
+            float padding = s(7.0f);
+            float imageSize = Math.max(1.0f, size - padding * 2.0f);
+            drawList.addImage(texId, x + padding, y + padding, x + padding + imageSize, y + padding + imageSize);
         } catch (Exception e) {
-            float cx = x + size / 2.0f;
-            float cy = y + size / 2.0f;
-            drawList.addCircle(cx, cy, s(6.0f), ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f), 16, s(2.0f));
+            float centerX = x + size * 0.5f;
+            float centerY = y + size * 0.5f;
+            int muted = ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f);
+            drawList.addCircle(centerX, centerY, s(6.0f), muted, 16, Math.max(1.0f, s(2.0f)));
+            drawList.addCircleFilled(centerX, centerY, s(2.0f), muted, 16);
         }
-        return clicked;
-    }
-
-    private static boolean customSidebarButton(String label, boolean selected, float width, float height) {
-        ImDrawList drawList = ImGui.getWindowDrawList();
-        float x = ImGui.getCursorScreenPosX();
-        float y = ImGui.getCursorScreenPosY();
-        ImGui.invisibleButton("##btn_" + label, width, height);
-        boolean clicked = ImGui.isItemClicked();
-        boolean hovered = ImGui.isItemHovered();
-
-        int bgCol = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) :
-                hovered  ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) :
-                        ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
-        drawList.addRectFilled(x, y, x + width, y + height, bgCol, s(6));
-
-        if (selected) drawList.addRectFilled(x, y, x + s(4), y + height, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), s(6), ImDrawFlags.RoundCornersLeft);
-
-        ImVec2 textSize = ImGui.calcTextSize(label);
-        float iconRadius = s(5);
-        float iconWidth = iconRadius * 2;
-        float spacing = s(14);
-        float contentStartX = x + s(20);
-        float iconCenterX = contentStartX + iconRadius;
-        float iconCenterY = y + height / 2.0f;
-        float textX = contentStartX + iconWidth + spacing;
-        float textY = y + (height - textSize.y) / 2.0f;
-
-        if (selected) {
-            drawList.addCircle(iconCenterX, iconCenterY, iconRadius, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), 16, s(1.5f));
-            drawList.addCircleFilled(iconCenterX, iconCenterY, iconRadius * 0.5f, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), 16);
-        } else {
-            drawList.addRect(iconCenterX - iconRadius, iconCenterY - iconRadius, iconCenterX + iconRadius, iconCenterY + iconRadius, ImGui.getColorU32(0.45f, 0.45f, 0.5f, 1.0f), s(2), 0, s(1.5f));
-            drawList.addRectFilled(iconCenterX - iconRadius/2, iconCenterY - iconRadius/2, iconCenterX + iconRadius/2, iconCenterY + iconRadius/2, ImGui.getColorU32(0.45f, 0.45f, 0.5f, 1.0f), s(1));
-        }
-
-        int textCol = selected ? ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f) : ImGui.getColorU32(0.75f, 0.75f, 0.8f, 1.0f);
-        drawList.addText(textX, textY, textCol, label);
         return clicked;
     }
 }
