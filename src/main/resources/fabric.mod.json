@@ -13,7 +13,7 @@
 	},
 	"license": "MIT License",
 	"icon": "assets/enchantments-indicator/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"ru.harimasa.ei.EnchantmentsIndicator"
