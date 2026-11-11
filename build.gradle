@@ -5,6 +5,10 @@ plugins {
 
 repositories {
 	mavenCentral()
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 dependencies {
@@ -38,6 +42,8 @@ dependencies {
 
 	implementation "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
 	include "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
+
+	implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {
