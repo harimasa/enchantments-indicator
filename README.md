@@ -41,7 +41,7 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian, Polsk
 - Inventory visuals
 - ~~_Partitioning into classes_~~
 - Menu localization
-- Config
+- _~~Config~~_
 - Logo
 - _~~Custom keybind~~_
 - Language selection dropdown
