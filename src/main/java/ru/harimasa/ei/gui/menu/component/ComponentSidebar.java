@@ -12,7 +12,6 @@ import ru.harimasa.ei.config.EIConfig;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentSidebar {
-
     private static final String[] PAGES = {"Colors", "Inventory"};
     private static final int SETTINGS_PAGE = 2;
 

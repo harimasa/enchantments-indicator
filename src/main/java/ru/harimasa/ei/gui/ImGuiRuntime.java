@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 
 public final class ImGuiRuntime {
-
     private static final float MIN_UI_SCALE = 0.50f;
     private static final float MAX_UI_SCALE = 2.00f;
     private static final float BASE_FONT_SIZE = 16.0f;

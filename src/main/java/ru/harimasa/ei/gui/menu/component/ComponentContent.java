@@ -9,7 +9,6 @@ import ru.harimasa.ei.gui.menu.component.sub.ComponentSubSettings;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentContent {
-
     private ComponentContent() {}
 
     public static void render(EIConfig config, boolean compact) {
@@ -21,7 +20,7 @@ public final class ComponentContent {
         ImGui.setCursorPos(padding, s(18.0f));
 
         if (config.page == 0) ComponentSubColors.render(config);
-        else if (config.page == 1) ComponentSubInventory.render();
+        else if (config.page == 1) ComponentSubInventory.render(config);
         else if (config.page == 2) ComponentSubSettings.render(config);
         ImGui.endChild();
     }

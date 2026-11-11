@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
 public final class ComponentHeader {
-
     private static final String TITLE = "Enchantments Indicator";
     private static final String ICON = "✧";
 
