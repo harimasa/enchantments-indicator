@@ -26,7 +26,9 @@ The mod was created by harimasa. But also:
 
 ## Dependencies
 fabric api
+fabricloader >= 0.20.1
 minecraft 1.21.11
+java >= 21
 
 ## Versions
 Right now it’s only 1.21.11; in the future, it will be 26.x
