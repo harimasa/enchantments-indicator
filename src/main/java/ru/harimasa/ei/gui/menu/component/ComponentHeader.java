@@ -7,6 +7,7 @@ import imgui.ImVec2;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
 import net.minecraft.client.Minecraft;
+import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
@@ -37,7 +38,7 @@ public final class ComponentHeader {
         float titleY = y + (height - titleSize.y) * 0.5f;
         float clipRight = Math.max(iconX, closeX - s(10.0f));
         drawList.pushClipRect(iconX, y, clipRight, y + height, true);
-        drawList.addText(font, titleFontSize, iconX, iconY, ImGui.getColorU32(0.75f, 0.35f, 1.0f, 1.0f), ICON);
+        drawList.addText(font, titleFontSize, iconX, iconY, ImGuiTheme.accentColorU32(), ICON);
         drawList.addText(font, titleFontSize, titleX, titleY, ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), TITLE);
         drawList.popClipRect();
 

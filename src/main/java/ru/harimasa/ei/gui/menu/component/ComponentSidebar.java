@@ -8,6 +8,7 @@ import imgui.flag.ImDrawFlags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.config.EIConfig;
+import ru.harimasa.ei.gui.menu.util.ImGuiTheme;
 
 import static ru.harimasa.ei.gui.menu.util.ImGuiUtil.s;
 
@@ -81,10 +82,10 @@ public final class ComponentSidebar {
         boolean clicked = ImGui.isItemClicked();
         boolean hovered = ImGui.isItemHovered();
 
-        int background = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) : hovered ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) : ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
+        int background = selected ? ImGuiTheme.panelColorU32(0.33f) : hovered ? ImGuiTheme.panelColorU32(0.18f) : ImGuiTheme.panelColorU32(0.06f);
         drawList.addRectFilled(x, y, x + width, y + height, background, s(6.0f));
 
-        int accent = ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f);
+        int accent = ImGuiTheme.accentColorU32();
         if (selected) {
             if (horizontal) {
                 drawList.addRectFilled(x, y + height - s(2.0f), x + width, y + height, accent, s(2.0f), ImDrawFlags.RoundCornersBottom);
@@ -120,7 +121,7 @@ public final class ComponentSidebar {
     }
 
     private static void drawIcon(ImDrawList drawList, boolean selected, float centerX, float centerY, float radius) {
-        int accent = ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f);
+        int accent = ImGuiTheme.accentColorU32();
         if (selected) {
             drawList.addCircle(centerX, centerY, radius, accent, 16, s(1.5f));
             drawList.addCircleFilled(centerX, centerY, radius * 0.5f, accent, 16);
@@ -140,10 +141,10 @@ public final class ComponentSidebar {
         boolean clicked = ImGui.isItemClicked();
         boolean hovered = ImGui.isItemHovered();
 
-        int background = selected ? ImGui.getColorU32(0.13f, 0.12f, 0.16f, 1.0f) : hovered ? ImGui.getColorU32(0.09f, 0.09f, 0.11f, 1.0f) : ImGui.getColorU32(0.06f, 0.06f, 0.08f, 1.0f);
+        int background = selected ? ImGuiTheme.panelColorU32(0.33f) : hovered ? ImGuiTheme.panelColorU32(0.18f) : ImGuiTheme.panelColorU32(0.06f);
         drawList.addRectFilled(x, y, x + size, y + size, background, s(6.0f));
         if (selected) {
-            drawList.addRect(x, y, x + size, y + size, ImGui.getColorU32(0.75f, 0.33f, 1.0f, 1.0f), s(6.0f), 0, Math.max(1.0f, s(1.0f)));
+            drawList.addRect(x, y, x + size, y + size, ImGuiTheme.accentColorU32(), s(6.0f), 0, Math.max(1.0f, s(1.0f)));
         }
 
         Identifier gearTexture = Identifier.fromNamespaceAndPath("enchantments-indicator", "textures/gui/settings.png");

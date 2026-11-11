@@ -93,12 +93,17 @@ public final class ImGuiUtil {
 
     public static boolean modeButton(String text, boolean selected, float width) {
         ImGui.pushStyleVar(ImGuiStyleVar.FrameBorderSize, s(1.0f));
+        float[] color;
         if (selected) {
-            ImGui.pushStyleColor(ImGuiCol.Button, 0.17f, 0.10f, 0.23f, 1.0f);
-            ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.22f, 0.12f, 0.30f, 1.0f);
-            ImGui.pushStyleColor(ImGuiCol.Border, 0.75f, 0.30f, 1.0f, 1.0f);
+            color = ImGuiTheme.panelColor(0.49f);
+            ImGui.pushStyleColor(ImGuiCol.Button, color[0], color[1], color[2], 1.0f);
+            color = ImGuiTheme.panelColor(0.68f);
+            ImGui.pushStyleColor(ImGuiCol.ButtonHovered, color[0], color[1], color[2], 1.0f);
+            color = ImGuiTheme.accentColor();
+            ImGui.pushStyleColor(ImGuiCol.Border, color[0], color[1], color[2], 1.0f);
         } else {
-            ImGui.pushStyleColor(ImGuiCol.Border, 0.20f, 0.21f, 0.25f, 1.0f);
+            color = ImGuiTheme.borderColor();
+            ImGui.pushStyleColor(ImGuiCol.Border, color[0], color[1], color[2], 1.0f);
         }
 
         boolean clicked = ImGui.button(text, width, s(30.0f));
