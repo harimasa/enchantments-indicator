@@ -8,8 +8,6 @@
 
 ## Preview
 
-## Setup
-
 ## License
 MIT License
 
@@ -35,7 +33,7 @@ java >= 21
 Right now it’s only 1.21.11; in the future, it will be 26.x
 
 ## Language
-English. Plans include Russian, Ukrainian, and Belarusian, Polska
+English Russian, Ukrainian, and Belarusian, Polska
 
 ## Roadmap
 - ~~_best gui_~~
