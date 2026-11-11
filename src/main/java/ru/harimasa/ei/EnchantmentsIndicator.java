@@ -10,6 +10,7 @@ import net.minecraft.resources.Identifier;
 import ru.harimasa.ei.config.ConfigManager;
 import ru.harimasa.ei.gui.ImGuiConfigScreen;
 import ru.harimasa.ei.gui.ImGuiRuntime;
+import ru.harimasa.ei.render.EIGlintShaders;
 
 public class EnchantmentsIndicator implements ClientModInitializer {
 	private static final KeyMapping.Category EI_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath("enchantments-indicator", "main"));
@@ -18,6 +19,7 @@ public class EnchantmentsIndicator implements ClientModInitializer {
 	public void onInitializeClient() {
 		ConfigManager.load();
 		ImGuiRuntime.setUiScale(ConfigManager.get().general.uiScale / 100.0f);
+		EIGlintShaders.ensureInitialized();
 
 		KeyMapping openMenu = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.enchantments-indicator.open_gui", InputConstants.Type.KEYSYM, InputConstants.KEY_RSHIFT, EI_CATEGORY));
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
