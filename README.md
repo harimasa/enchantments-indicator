@@ -22,6 +22,21 @@ The mod was created by harimasa. But also thanks:
 ## Features
 
 ## Links
+<p align="center">
+<a href="https://github.com/harimasa/enchantments-indicator">
+  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/github.png?raw=true" alt="Github" width="43"/></a>
+
+<a href="https://modrinth.com/mod/enchantments-indicator">
+  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/modrinth.png?raw=true" alt="Modrinth" width="45"/></a>
+
+  <a href="https://namemc.com/profile/harimasa.1">
+  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/namemc.png?raw=true" alt="Namemc" width="50"/></a>
+
+<a href="https://google.com/">
+  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/curseforge.png?raw=true" alt="Curseforge" width="50"/></a>
+
+<a href="https://discord.com/users/1265171544049717279">
+  <img src="https://github.com/harimasa/perfect-icons-trust-me-/blob/main/discord.png?raw=true" alt="Discord" width="50"/></a>
 
 ## Dependencies
 
@@ -32,6 +47,7 @@ The mod was created by harimasa. But also thanks:
 | Minecraft     | `1.21.11`   |    ✅     |
 | Java          | `>= 21`     |    ✅     |
 | Mod Menu      | `>=17.0.1`  |    ❌     |
+
 ## Versions
 Right now it’s only 1.21.11; in the future, it will be 26.x
 
