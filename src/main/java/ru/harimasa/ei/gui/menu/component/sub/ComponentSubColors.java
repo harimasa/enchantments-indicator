@@ -21,7 +21,7 @@ public final class ComponentSubColors {
         float startX = ImGui.getCursorPosX();
 
         ImGui.setCursorPosX(startX);
-        ImGui.text(Lang.get("ei.colors.title"));
+        ImGuiUtil.heading(Lang.get("ei.colors.title"), startX);
         ImGui.spacing();
 
         ImGui.setCursorPosX(startX);
@@ -39,7 +39,6 @@ public final class ComponentSubColors {
         }
 
         boolean glintMode = config.colors.renderMode == RenderMode.GLINT;
-        ImGuiUtil.rowSeparator(startX);
 
         EnchantmentOption[] options = EnchantmentOption.values();
         int selected = EnchantmentOption.clampIndex(config.colors.enchantment);
@@ -56,7 +55,6 @@ public final class ComponentSubColors {
             }
             ImGui.endCombo();
         }
-        ImGuiUtil.rowSeparator(startX);
 
         if (glintMode) {
             ImGuiUtil.formCheckbox(Lang.get("ei.colors.gradient"), "##gradient", config.colors.gradient, startX,
@@ -64,7 +62,6 @@ public final class ComponentSubColors {
                         config.colors.gradient = value;
                         ConfigManager.markDirty();
                     });
-            ImGuiUtil.rowSeparator(startX);
         }
 
         ImGuiUtil.formLabel(Lang.get("ei.colors.color"), startX);
@@ -78,7 +75,6 @@ public final class ComponentSubColors {
                 ConfigManager.markDirty();
             }
         }
-        ImGuiUtil.rowSeparator(startX);
 
         if (glintMode) {
             ImGuiUtil.formLabel(Lang.get("ei.colors.intensity"), startX);
@@ -93,8 +89,8 @@ public final class ComponentSubColors {
                 config.colors.intensity = Math.clamp(tempIntensity[0] / 100.0f, 0.0f, 2.0f);
                 ConfigManager.markDirty();
             }
-            ImGuiUtil.rowSeparator(startX);
         }
+        ImGuiUtil.rowSeparator(startX);
         ImGui.spacing();
         ImGuiUtil.note(Lang.get(glintMode ? "ei.colors.note.glint" : "ei.colors.note.texture"), startX);
     }

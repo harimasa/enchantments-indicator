@@ -25,7 +25,7 @@ public final class ComponentSidebar {
         float padding = s(10.0f);
         float buttonWidth = Math.max(s(40.0f), width - padding * 2.0f);
         float buttonHeight = s(44.0f);
-        float gap = s(14.0f);
+        float gap = s(2.0f);
 
         ImGui.setCursorPosY(s(14.0f));
         for (int i = 0; i < PAGE_KEYS.length; i++) {

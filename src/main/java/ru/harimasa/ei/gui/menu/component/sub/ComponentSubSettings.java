@@ -18,16 +18,14 @@ public final class ComponentSubSettings {
         float startX = ImGui.getCursorPosX();
 
         ImGui.setCursorPosX(startX);
-        ImGui.text(Lang.get("ei.settings.title"));
+        ImGuiUtil.heading(Lang.get("ei.settings.title"), startX);
         ImGui.spacing();
-        ImGuiUtil.rowSeparator(startX);
 
         ImGuiUtil.formCheckbox(Lang.get("ei.settings.enable_mod"), "##modEnabled", config.general.modEnabled, startX,
                 value -> {
                     config.general.modEnabled = value;
                     ConfigManager.markDirty();
                 });
-        ImGuiUtil.rowSeparator(startX);
         ImGuiUtil.formLabel(Lang.get("ei.settings.main_color"), startX);
         ImGuiUtil.formControlWidth();
         float[] mainColor = config.general.mainColor.rgb();
@@ -35,7 +33,6 @@ public final class ComponentSubSettings {
             config.general.mainColor.setRgb(mainColor);
             ConfigManager.markDirty();
         }
-        ImGuiUtil.rowSeparator(startX);
         ImGuiUtil.formLabel(Lang.get("ei.settings.ui_scale"), startX);
         ImGuiUtil.formControlWidth();
 

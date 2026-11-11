@@ -1,6 +1,9 @@
 package ru.harimasa.ei.gui.menu.util;
 
+import imgui.ImFont;
 import imgui.ImGui;
+import imgui.ImGuiStyle;
+import imgui.ImVec2;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
 import ru.harimasa.ei.gui.ImGuiRuntime;
@@ -14,11 +17,21 @@ public final class ImGuiUtil {
     private static final float CONTROL_MIN_WIDTH = 72.0f;
     private static final float CONTROL_MAX_WIDTH = 213.0f;
     private static final float COLUMN_GAP = 12.0f;
+    private static final float FIELD_SPACING_EXTRA = 4.0f;
 
     private ImGuiUtil() {}
 
     public static float s(float value) {
         return value * ImGuiRuntime.UI_SCALE;
+    }
+
+    public static void pushFieldSpacing() {
+        ImGuiStyle style = ImGui.getStyle();
+        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, style.getItemSpacingX(), style.getItemSpacingY() + s(FIELD_SPACING_EXTRA));
+    }
+
+    public static void popFieldSpacing() {
+        ImGui.popStyleVar();
     }
 
     public static boolean stackedRows(float availableWidth) {
@@ -89,6 +102,27 @@ public final class ImGuiUtil {
         ImGui.pushTextWrapPos(x + availableWidth);
         ImGui.textDisabled(text);
         ImGui.popTextWrapPos();
+    }
+
+    public static void heading(String text, float startX) {
+        ImGui.setCursorPosX(startX);
+        ImFont bold = ImGuiRuntime.boldFont();
+        if (bold == null) {
+            ImGui.text(text);
+            return;
+        }
+
+        float size = ImGui.getFontSize() + 1.0f;
+        ImVec2 textSize = bold.calcTextSizeA(size, Float.MAX_VALUE, 0.0f, text);
+        ImGui.getWindowDrawList().addText(
+                bold,
+                (int) size,
+                ImGui.getCursorScreenPosX(),
+                ImGui.getCursorScreenPosY(),
+                ImGui.getColorU32(ImGuiCol.Text),
+                text
+        );
+        ImGui.dummy(textSize.x, textSize.y);
     }
 
     public static boolean modeButton(String text, boolean selected, float width) {

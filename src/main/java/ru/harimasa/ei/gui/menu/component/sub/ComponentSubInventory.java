@@ -16,7 +16,7 @@ public final class ComponentSubInventory {
         float startX = ImGui.getCursorPosX();
 
         ImGui.setCursorPosX(startX);
-        ImGui.text(Lang.get("ei.inventory.title"));
+        ImGuiUtil.heading(Lang.get("ei.inventory.title"), startX);
         ImGui.spacing();
 
         ImGuiUtil.formCheckbox(Lang.get("ei.inventory.enable"), "##inventoryEnabled", config.inventory.enabled, startX,
@@ -24,7 +24,6 @@ public final class ComponentSubInventory {
                     config.inventory.enabled = value;
                     ConfigManager.markDirty();
                 });
-        ImGuiUtil.rowSeparator(startX);
 
         ImGuiUtil.formLabel(Lang.get("ei.inventory.render_mode"), startX);
         float availableWidth = ImGui.getContentRegionAvail().x;
