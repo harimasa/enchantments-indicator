@@ -39,7 +39,7 @@ Currently, only English. Plans include Russian, Ukrainian, and Belarusian.
 ## Roadmap
 - best gui
 - Inventory visuals
-- Partitioning into classes
+~~_- Partitioning into classes_~~
 - Menu localization
 - Config
 - Logo
