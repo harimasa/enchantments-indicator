@@ -28,3 +28,10 @@ The mod was created by harimasa. But also:
 ## Language
 
 ## Roadmap
+- best gui
+- Inventory visuals
+- Partitioning into classes
+- Menu localization
+- Config
+- Logo
+- Custom keybind
