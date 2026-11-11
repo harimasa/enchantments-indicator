@@ -12,7 +12,7 @@
 		"sources": "https://github.com/harimasa/enchantments-indicator",
 		"issues": "https://github.com/harimasa/enchantments-indicator/issues"
 	},
-	"license": "MIT License",
+	"license": "MIT LICENSE",
 	"icon": "assets/enchantments-indicator/icon.png",
 	"environment": "client",
 	"entrypoints": {
