@@ -29,6 +29,11 @@ public final class ComponentSubSettings {
                     config.general.modEnabled = value;
                     ConfigManager.markDirty();
                 });
+        ImGuiUtil.formCheckbox(Lang.get("ei.settings.liquid_glass"), "##liquidGlass", config.general.liquidGlass, startX,
+                value -> {
+                    config.general.liquidGlass = value;
+                    ConfigManager.markDirty();
+                });
         ImGuiUtil.formLabel(Lang.get("ei.settings.main_color"), startX);
         ImGuiUtil.formControlWidth();
         float[] mainColor = config.general.mainColor.rgb();

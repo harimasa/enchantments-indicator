@@ -14,6 +14,7 @@ import imgui.ImGuiStyle;
 import imgui.gl3.ImGuiImplGl3;
 import org.lwjgl.opengl.GL11C;
 import org.lwjgl.opengl.GL30C;
+import ru.harimasa.ei.render.LiquidGlassBlur;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +38,15 @@ public final class ImGuiRuntime {
 
     private static boolean initialized;
     private static boolean drawDataReady;
+    private static boolean backgroundBlurEnabled;
+    private static boolean blurRegionValid;
+    private static float blurRegionX;
+    private static float blurRegionY;
+    private static float blurRegionWidth;
+    private static float blurRegionHeight;
+    private static float blurCornerRadius;
+    private static float displayWidth;
+    private static float displayHeight;
 
     public static float UI_SCALE = 1.00f;
 
@@ -47,6 +57,20 @@ public final class ImGuiRuntime {
     private static ImFont boldFont;
 
     private ImGuiRuntime() {}
+
+    public static void setBackgroundBlurEnabled(boolean enabled) {
+        backgroundBlurEnabled = enabled;
+    }
+
+    /** Sets the exact rounded area in ImGui logical screen coordinates that receives blur. */
+    public static void setBlurRegion(float x, float y, float width, float height, float cornerRadius) {
+        blurRegionX = x;
+        blurRegionY = y;
+        blurRegionWidth = width;
+        blurRegionHeight = height;
+        blurCornerRadius = cornerRadius;
+        blurRegionValid = width > 0.0f && height > 0.0f;
+    }
 
     public static void setUiScale(float scale) {
         if (Float.isNaN(scale)) return;
@@ -242,6 +266,9 @@ public final class ImGuiRuntime {
         }
         applyPendingScale();
         drawDataReady = false;
+        blurRegionValid = false;
+        displayWidth = width;
+        displayHeight = height;
         Minecraft minecraft = Minecraft.getInstance();
         ImGuiIO io = ImGui.getIO();
         if (width > 0 && height > 0) {
@@ -267,6 +294,12 @@ public final class ImGuiRuntime {
         Minecraft minecraft = Minecraft.getInstance();
         RenderTarget framebuffer = minecraft.getMainRenderTarget();
         assert framebuffer.getColorTexture() != null;
+
+        if (backgroundBlurEnabled && blurRegionValid) {
+            LiquidGlassBlur.render(framebuffer, blurRegionX, blurRegionY, blurRegionWidth, blurRegionHeight,
+                    blurCornerRadius, displayWidth, displayHeight);
+        }
+
         int framebufferId = ((GlTexture) framebuffer.getColorTexture()).getFbo(((GlDevice) RenderSystem.getDevice()).directStateAccess(), null);
 
         GlStateManager._glBindFramebuffer(GL30C.GL_FRAMEBUFFER, framebufferId);
@@ -284,9 +317,12 @@ public final class ImGuiRuntime {
         if (!initialized) return;
 
         RENDERER.shutdown();
+        LiquidGlassBlur.shutdown();
         ImGui.destroyContext();
 
         initialized = false;
         drawDataReady = false;
+        backgroundBlurEnabled = false;
+        blurRegionValid = false;
     }
 }

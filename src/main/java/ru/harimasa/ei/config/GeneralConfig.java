@@ -7,6 +7,7 @@ public final class GeneralConfig {
     public static final float MAX_UI_SCALE = 100.0f;
 
     public boolean modEnabled = true;
+    public boolean liquidGlass = true;
     public float uiScale = 100.0f;
     public String language = "";
     public ColorConfig mainColor = new ColorConfig(0.75f, 0.33f, 1.0f);

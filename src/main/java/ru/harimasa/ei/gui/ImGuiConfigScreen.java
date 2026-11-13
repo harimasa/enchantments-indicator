@@ -53,10 +53,12 @@ public final class ImGuiConfigScreen extends Screen {
 
     @Override
     public void render(@NonNull GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        graphics.fill(0, 0, width, height, 0x88000000);
+        boolean glass = config.general.liquidGlass;
+        ImGuiRuntime.setBackgroundBlurEnabled(glass);
+
         ImGuiRuntime.beginFrame(width, height, mouseX, mouseY);
         ImGuiTheme.pushTheme();
-        drawMenu();
+        ImGui.getBackgroundDrawList().addRectFilled(0.0f, 0.0f, width, height, glass ? 0x00000000 : 0x88000000);        drawMenu();
         ImGui.popStyleColor(ImGuiTheme.THEME_COLOR_COUNT);
         ImGui.popStyleVar(7);
         ImGuiRuntime.endFrame();
@@ -100,7 +102,11 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.setNextWindowSize(windowWidth, windowHeight, ImGuiCond.Always);
 
         int flags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoMove;
-        if (!ImGui.begin("##enchantments_indicator", flags)) {
+        boolean windowVisible = ImGui.begin("##enchantments_indicator", flags);
+
+        ImGuiRuntime.setBlurRegion(ImGui.getWindowPosX() + WINDOW_BG_INSET, ImGui.getWindowPosY() + WINDOW_BG_INSET, ImGui.getWindowWidth() - WINDOW_BG_INSET * 2.0f, ImGui.getWindowHeight() - WINDOW_BG_INSET * 2.0f, s(12.0f));
+
+        if (!windowVisible) {
             ImGui.end();
             return;
         }
@@ -146,38 +152,54 @@ public final class ImGuiConfigScreen extends Screen {
         ImGui.end();
     }
 
-    private static void drawWindowBackground() {
-        float x = ImGui.getWindowPosX();
-        float y = ImGui.getWindowPosY();
-        float right = x + ImGui.getWindowWidth();
-        float bottom = y + ImGui.getWindowHeight();
-        ImGui.getBackgroundDrawList().addRectFilled(x + WINDOW_BG_INSET, y + WINDOW_BG_INSET, right - WINDOW_BG_INSET, bottom - WINDOW_BG_INSET, ImGuiTheme.windowBgColor(), s(12.0f));
+    private void drawWindowBackground() {
+        float x = ImGui.getWindowPosX() + WINDOW_BG_INSET;
+        float y = ImGui.getWindowPosY() + WINDOW_BG_INSET;
+        float right = ImGui.getWindowPosX() + ImGui.getWindowWidth() - WINDOW_BG_INSET;
+        float bottom = ImGui.getWindowPosY() + ImGui.getWindowHeight() - WINDOW_BG_INSET;
+        float rounding = s(12.0f);
+
+        var drawList = ImGui.getBackgroundDrawList();
+        if (config.general.liquidGlass) {
+            drawList.addRectFilled(x, y, right, bottom, ImGui.getColorU32(0.06f, 0.065f, 0.08f, 0.38f), rounding);
+            drawList.addRect(x, y, right, bottom, ImGui.getColorU32(1.0f, 1.0f, 1.0f, 0.8f), rounding, 0, 1.0f);
+        } else {
+            drawList.addRectFilled(x, y, right, bottom, ImGuiTheme.windowBgColor(), rounding);
+        }
     }
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
-        ImGui.getIO().addMouseButtonEvent(event.button(), true);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+            ImGui.getIO().addMouseButtonEvent(event.button(), true);
+        }
         return true;
     }
 
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
-        ImGui.getIO().addMouseButtonEvent(event.button(), false);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+            ImGui.getIO().addMouseButtonEvent(event.button(), false);
+        }
         return true;
     }
 
     @Override
     public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+        }
         return true;
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontal, double vertical) {
-        ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);
-        ImGui.getIO().addMouseWheelEvent((float) horizontal, (float) vertical);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);
+            ImGui.getIO().addMouseWheelEvent((float) horizontal, (float) vertical);
+        }
         return true;
     }
 
