@@ -156,28 +156,36 @@ public final class ImGuiConfigScreen extends Screen {
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
-        ImGui.getIO().addMouseButtonEvent(event.button(), true);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+            ImGui.getIO().addMouseButtonEvent(event.button(), true);
+        }
         return true;
     }
 
     @Override
     public boolean mouseReleased(MouseButtonEvent event) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
-        ImGui.getIO().addMouseButtonEvent(event.button(), false);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+            ImGui.getIO().addMouseButtonEvent(event.button(), false);
+        }
         return true;
     }
 
     @Override
     public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
-        ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) event.x(), (float) event.y());
+        }
         return true;
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontal, double vertical) {
-        ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);
-        ImGui.getIO().addMouseWheelEvent((float) horizontal, (float) vertical);
+        if (ImGui.getCurrentContext().isValidPtr()) {
+            ImGui.getIO().addMousePosEvent((float) mouseX, (float) mouseY);
+            ImGui.getIO().addMouseWheelEvent((float) horizontal, (float) vertical);
+        }
         return true;
     }
 
